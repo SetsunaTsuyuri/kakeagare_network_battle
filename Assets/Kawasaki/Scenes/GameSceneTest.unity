@@ -284,6 +284,9 @@ GameObject:
   - component: {fileID: 1235557826}
   - component: {fileID: 1235557825}
   - component: {fileID: 1235557827}
+  - component: {fileID: 1235557830}
+  - component: {fileID: 1235557828}
+  - component: {fileID: 1235557829}
   m_Layer: 0
   m_Name: System
   m_TagString: Untagged
@@ -303,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4188b22cc2275f44c9520a0041bf71d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPrefabName: Player
+  _playerPrefabName: Kawasaki_Player
   _spawnPositions:
   - {fileID: 1207530167}
   - {fileID: 1949884853}
@@ -334,6 +337,58 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac5a2ae41fc759f42a58d5f598c0f573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1235557828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235557824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e34432eaefc8145b5d29d8447cf41d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mapPrefabName: Kawasaki_Map
+  _offsetY: 11
+  _killZonePrefabName: Kawasaki_Killzone
+  _killZoneInitialPosition: {x: 0, y: -8, z: 0}
+  _initialMaps: 3
+  _idOffsetOfmapToRemove: 2
+--- !u!114 &1235557829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235557824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &1235557830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235557824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 707425b1d59aa3542b59a8bd77e6a946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1563077074
@@ -470,7 +525,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.3378906, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
