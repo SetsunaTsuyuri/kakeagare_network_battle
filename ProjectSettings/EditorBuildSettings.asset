@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Suzuki/Scenes/GameScene.unity
-    guid: 91c9856e6866df840900ca2db71f2d4d
+    path: Assets/Kawasaki/Scenes/GameSceneTest.unity
+    guid: d157eaab6c66f6a49aefbec775c05acc
   m_configObjects: {}
