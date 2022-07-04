@@ -12,8 +12,6 @@ namespace Kawasaki
     /// </summary>
     public class MapsManager : MonoBehaviour
     {
-        /// <summary>マップを構成するプレハブの名前</summary>
-        [SerializeField] string _mapPrefabName;
         /// <summary>マップのプレハブをいくらおきに設置するか</summary>
         [SerializeField] float _offsetY = 10f;
         /// <summary>KillZone のプレハブ名</summary>
@@ -25,6 +23,17 @@ namespace Kawasaki
         /// 現在のシーンに存在するインスタンス
         /// </summary>
         public static MapsManager Current = null;
+
+        /// <summary>
+        /// マップのプレハブ名
+        /// </summary>
+        [SerializeField]
+        string[] _mapPrefabNames = { };
+
+        /// <summary>
+        /// マップのグリッド
+        /// </summary>
+        public Grid MapsGrid { get; set; } = null;
 
         /// <summary>
         /// 最初に作るマップの数
@@ -46,6 +55,8 @@ namespace Kawasaki
         private void Awake()
         {
             Current = this;
+
+            MapsGrid = GetComponentInChildren<Grid>();
         }
 
         /// <summary>
@@ -106,12 +117,16 @@ namespace Kawasaki
             // 位置
             Vector3 position = new(0.0f, MapCreationCount * _offsetY, 0.0f);
 
-            // インスタンス
-            GameObject instance = PhotonNetwork.Instantiate(_mapPrefabName, position, Quaternion.identity);
+            // プレハブ名
+            int index = Random.Range(0, _mapPrefabNames.Length);
+            string prefabName = _mapPrefabNames[index];
 
-            // マップのIDを設定する
+            // インスタンス
+            GameObject instance = PhotonNetwork.Instantiate(prefabName, position, Quaternion.identity);
+            
+            // マップのセットアップと同期を行う
             Map map = instance.GetComponent<Map>();
-            map.SetAndSynchronizeId(MapCreationCount);
+            map.SetUpAndSynchronize(MapCreationCount);
 
             // マップ作成数を増やす
             MapCreationCount++;

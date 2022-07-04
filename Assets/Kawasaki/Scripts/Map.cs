@@ -28,26 +28,31 @@ namespace Kawasaki
         }
 
         /// <summary>
-        /// IDを設定して同期する
+        /// セットアップと同期を行う
         /// </summary>
         /// <param name="id">ID</param>
-        public void SetAndSynchronizeId(int id)
+        public void SetUpAndSynchronize(int id)
         {
-            Id = id;
-            object[] parameters = { Id };
-            View.RPC(nameof(SetId), RpcTarget.OthersBuffered, parameters);
+            SetUp(id);
+
+            object[] parameters = { id };
+            View.RPC(nameof(SetUp), RpcTarget.OthersBuffered, parameters);
         }
 
         /// <summary>
-        /// IDを設定する
+        /// セットアップを行う
         /// </summary>
         /// <param name="id">ID</param>
         [PunRPC]
-        public void SetId(int id)
+        public void SetUp(int id)
         {
             Id = id;
+
+            Transform parent = MapsManager.Current.MapsGrid.transform;
+            transform.SetParent(parent);
         }
 
+        
         /// <summary>
         /// マップを増やせるかどうか設定する
         /// </summary>
