@@ -7,33 +7,33 @@ using Photon.Pun;
 namespace Karaki
 {
     /// <summary>
-    /// ƒvƒŒƒCƒ„[‚Ì“®‚«‚ğ§Œä‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg
+    /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‹•ãã‚’åˆ¶å¾¡ã™ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D), typeof(PhotonView))]
     public class PlayerMovement : MonoBehaviour
     {
-        /// <summary>…•½ˆÚ“®‚Ì“ü—Í–¼</summary>
+        /// <summary>æ°´å¹³ç§»å‹•ã®å…¥åŠ›å</summary>
         const string _INPUT_NAME_HORIZONTAL = "Horizontal";
 
-        /// <summary>ƒWƒƒƒ“ƒv‘€ì‚Ì“ü—Í–¼</summary>
+        /// <summary>ã‚¸ãƒ£ãƒ³ãƒ—æ“ä½œã®å…¥åŠ›å</summary>
         const string _INPUT_NAME_JUMP = "Jump";
 
-        /// <summary>’n–ÊƒŒƒCƒ„–¼</summary>
+        /// <summary>åœ°é¢ãƒ¬ã‚¤ãƒ¤å</summary>
         const string _LAYER_NAME_GROUND = "Ground";
 
-        /// <summary>’eƒŒƒCƒ„–¼</summary>
+        /// <summary>å¼¾ãƒ¬ã‚¤ãƒ¤å</summary>
         const string _LAYER_NAME_BULLET = "Bullet";
 
-        [SerializeField, Tooltip("ƒvƒŒƒCƒ„[‚ÌˆÚ“®‘¬“x")] 
+        [SerializeField, Tooltip("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•é€Ÿåº¦")] 
         float _speed = 5f;
 
-        [SerializeField, Tooltip("ƒvƒŒƒCƒ„[‚ÌƒWƒƒƒ“ƒv‘¬“x")]
+        [SerializeField, Tooltip("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¸ãƒ£ãƒ³ãƒ—é€Ÿåº¦")]
         float _jumpSpeed = 5f;
 
-        [SerializeField, Tooltip("‹CâŠÔ(s)")]
+        [SerializeField, Tooltip("æ°—çµ¶æ™‚é–“(s)")]
         float _stunTime = 2f;
 
-        /// <summary>‹CâŠÔ‚ğƒJƒEƒ“ƒg‚·‚éƒ^ƒCƒ}[</summary>
+        /// <summary>æ°—çµ¶æ™‚é–“ã‚’ã‚«ã‚¦ãƒ³ãƒˆã™ã‚‹ã‚¿ã‚¤ãƒãƒ¼</summary>
         float _stunTimeCount = 0f;
 
         PhotonView _view;
@@ -53,10 +53,10 @@ namespace Karaki
 
         private void Update()
         {
-            //©•ª‚ÌƒvƒŒƒCƒ„[ƒIƒuƒWƒFƒNƒg‚Å‚È‚¯‚ê‚Îó‚¯•t‚¯‚È‚¢
+            //è‡ªåˆ†ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ãªã‘ã‚Œã°å—ã‘ä»˜ã‘ãªã„
             if (!_view.IsMine) return;
 
-            //‹CâŠÔ‚ªc‚Á‚Ä‚¢‚ê‚ÎAƒJƒEƒ“ƒg‚µ‚½‚¤‚¦‚Å—£’E
+            //æ°—çµ¶æ™‚é–“ãŒæ®‹ã£ã¦ã„ã‚Œã°ã€ã‚«ã‚¦ãƒ³ãƒˆã—ãŸã†ãˆã§é›¢è„±
             if (_stunTimeCount > 0f)
             {
                 _stunTimeCount -= Time.deltaTime;
@@ -80,13 +80,22 @@ namespace Karaki
         {
             switch (collision.gameObject.tag)
             {
-                //’n–Ê‚ÉÚG
+                //åœ°é¢ã«æ¥è§¦
                 case _LAYER_NAME_GROUND:
                     _isGrounded = true;
                     break;
-                //“G’e‚ÉÚG
+
+                default: break;
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            switch (collision.gameObject.tag)
+            {
+                //æ•µå¼¾ã«æ¥è§¦
                 case _LAYER_NAME_BULLET:
-                    //‹Câó‘Ô‚É
+                    //æ°—çµ¶çŠ¶æ…‹ã«
                     _stunTimeCount = _stunTime;
                     break;
 
@@ -94,9 +103,7 @@ namespace Karaki
             }
         }
 
-        /// <summary>
-        /// Cinemachine Virtual Camera ‚Ì Follow ‚É©•ª‚ğƒZƒbƒg‚·‚é
-        /// </summary>
+        /// <summary>Cinemachine Virtual Camera ã® Follow ã«è‡ªåˆ†ã‚’ã‚»ãƒƒãƒˆã™ã‚‹</summary>
         void FindCamera()
         {
             var vcam = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
