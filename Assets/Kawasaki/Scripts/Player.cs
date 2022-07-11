@@ -10,7 +10,15 @@ namespace Kawasaki
     /// </summary>
     public class Player : MonoBehaviour
     {
-        PhotonView _view = null;
+        /// <summary>
+        /// フォトンビュー
+        /// </summary>
+        public PhotonView PhotonView { get; private set; } = null;
+
+        /// <summary>
+        /// プレイヤーの移動
+        /// </summary>
+        public Karaki.PlayerMovement Movement { get; private set; } = null;
 
         /// <summary>
         /// 他のプレイヤーより低い位置にいる
@@ -19,7 +27,8 @@ namespace Kawasaki
 
         private void Awake()
         {
-            _view = GetComponent<PhotonView>();
+            PhotonView = GetComponent<PhotonView>();
+            Movement = GetComponent<Karaki.PlayerMovement>();
         }
 
         private void Start()
@@ -34,7 +43,7 @@ namespace Kawasaki
             }
 
             // 自分がログインした時はマップを生成する
-            if (_view.IsMine)
+            if (PhotonView.IsMine)
             {
                 MapsManager.Current.CreateMaps();
             }
@@ -51,6 +60,25 @@ namespace Kawasaki
             {
                 hit.OnHit(this);
             }
+        }
+
+        /// <summary>
+        /// 加速する
+        /// </summary>
+        /// <param name="scale">加速倍率</param>
+        /// <param name="time">効果時間</param>
+        public void Accelerate(float scale, float time)
+        {
+            // PlayerMovementの処理
+        }
+
+        /// <summary>
+        /// 気絶する
+        /// </summary>
+        /// <param name="time">効果時間</param>
+        public void BeStunned(float time)
+        {
+            // PlayerMovementの処理
         }
     }
 }

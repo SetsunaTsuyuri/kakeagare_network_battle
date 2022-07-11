@@ -18,7 +18,7 @@ namespace Kawasaki
         /// <summary>
         /// プレイヤーリスト
         /// </summary>
-        readonly List<Player> _players = new();
+        public readonly List<Player> Players = new();
 
         private void Awake()
         {
@@ -27,19 +27,19 @@ namespace Kawasaki
 
         public static void Register(Player player)
         {
-            Current._players.Add(player);
+            Current.Players.Add(player);
         }
 
         private void LateUpdate()
         {
             // 最下位フラグを全てOFFにする
-            foreach (var player in _players)
+            foreach (var player in Players)
             {
                 player.IsInTheLowestPosition = false;
             }
 
             // 最も低い位置にいるプレイヤーの最下位フラグをONにする
-            Player lowest = _players
+            Player lowest = Players
                 .Where(x => x != null)
                 .OrderBy(x => x.transform.position.y)
                 .FirstOrDefault();
