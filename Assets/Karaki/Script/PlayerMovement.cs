@@ -7,34 +7,40 @@ using Photon.Pun;
 namespace Karaki
 {
     /// <summary>
-    /// ƒvƒŒƒCƒ„[‚Ì“®‚«‚ğ§Œä‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg
+    /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‹•ãã‚’åˆ¶å¾¡ã™ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D), typeof(PhotonView))]
     public class PlayerMovement : MonoBehaviour
     {
-        /// <summary>…•½ˆÚ“®‚Ì“ü—Í–¼</summary>
+        /// <summary>æ°´å¹³ç§»å‹•ã®å…¥åŠ›å</summary>
         const string _INPUT_NAME_HORIZONTAL = "Horizontal";
 
-        /// <summary>ƒWƒƒƒ“ƒv‘€ì‚Ì“ü—Í–¼</summary>
+        /// <summary>ã‚¸ãƒ£ãƒ³ãƒ—æ“ä½œã®å…¥åŠ›å</summary>
         const string _INPUT_NAME_JUMP = "Jump";
 
-        /// <summary>’n–ÊƒŒƒCƒ„–¼</summary>
+        /// <summary>åœ°é¢ãƒ¬ã‚¤ãƒ¤å</summary>
         const string _LAYER_NAME_GROUND = "Ground";
 
-        /// <summary>’eƒŒƒCƒ„–¼</summary>
+        /// <summary>å¼¾ãƒ¬ã‚¤ãƒ¤å</summary>
         const string _LAYER_NAME_BULLET = "Bullet";
 
-        [SerializeField, Tooltip("ƒvƒŒƒCƒ„[‚ÌˆÚ“®‘¬“x")] 
+        [SerializeField, Tooltip("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•é€Ÿåº¦")] 
         float _speed = 5f;
 
-        [SerializeField, Tooltip("ƒvƒŒƒCƒ„[‚ÌƒWƒƒƒ“ƒv‘¬“x")]
+        [SerializeField, Tooltip("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¸ãƒ£ãƒ³ãƒ—é€Ÿåº¦")]
         float _jumpSpeed = 5f;
 
-        [SerializeField, Tooltip("‹CâŠÔ(s)")]
+        [SerializeField, Tooltip("æ°—çµ¶æ™‚é–“(s)")]
         float _stunTime = 2f;
 
-        /// <summary>‹CâŠÔ‚ğƒJƒEƒ“ƒg‚·‚éƒ^ƒCƒ}[</summary>
+        /// <summary>æ°—çµ¶æ™‚é–“ã‚’ã‚«ã‚¦ãƒ³ãƒˆã™ã‚‹ã‚¿ã‚¤ãƒãƒ¼</summary>
         float _stunTimeCount = 0f;
+
+        /// <summary>ç§»å‹•é€Ÿåº¦UPå€ç‡</summary>
+        float _speedUpRate = 1f;
+
+        /// <summary>ç§»å‹•é€Ÿåº¦UPæ™‚é–“ã‚’ã‚«ã‚¦ãƒ³ãƒˆã™ã‚‹ã‚¿ã‚¤ãƒãƒ¼</summary>
+        float _speedUpTimeCount = 0f;
 
         PhotonView _view;
         Rigidbody2D _rb;
@@ -53,19 +59,30 @@ namespace Karaki
 
         private void Update()
         {
-            //©•ª‚ÌƒvƒŒƒCƒ„[ƒIƒuƒWƒFƒNƒg‚Å‚È‚¯‚ê‚Îó‚¯•t‚¯‚È‚¢
+            //è‡ªåˆ†ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ãªã‘ã‚Œã°å—ã‘ä»˜ã‘ãªã„
             if (!_view.IsMine) return;
 
-            //‹CâŠÔ‚ªc‚Á‚Ä‚¢‚ê‚ÎAƒJƒEƒ“ƒg‚µ‚½‚¤‚¦‚Å—£’E
+            //æ°—çµ¶æ™‚é–“ãŒæ®‹ã£ã¦ã„ã‚Œã°ã€ã‚«ã‚¦ãƒ³ãƒˆã—ãŸã†ãˆã§é›¢è„±
             if (_stunTimeCount > 0f)
             {
                 _stunTimeCount -= Time.deltaTime;
                 return;
             }
 
+            //ç§»å‹•é€Ÿåº¦UPæ™‚é–“ãŒæ®‹ã£ã¦ã„ã‚Œã°æ™‚é–“çµŒé
+            if (_stunTimeCount > 0f)
+            {
+                _stunTimeCount -= Time.deltaTime;
+                //ä»Šã®æ™‚é–“çµŒéã§0ã«ãªã£ãŸã‚‰é€Ÿåº¦å€ç‡ã‚’1ã«æˆ»ã™
+                if(_stunTimeCount < 0f)
+                {
+                    _speedUpTimeCount = 1f;
+                }
+            }
+
             float h = Input.GetAxisRaw(_INPUT_NAME_HORIZONTAL);
             Vector2 velocity = _rb.velocity;
-            velocity.x = _speed * h;
+            velocity.x = _speed * h * _speedUpTimeCount;
 
             if (Input.GetButtonDown(_INPUT_NAME_JUMP) && _isGrounded)
             {
@@ -80,13 +97,22 @@ namespace Karaki
         {
             switch (collision.gameObject.tag)
             {
-                //’n–Ê‚ÉÚG
+                //åœ°é¢ã«æ¥è§¦
                 case _LAYER_NAME_GROUND:
                     _isGrounded = true;
                     break;
-                //“G’e‚ÉÚG
+
+                default: break;
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            switch (collision.gameObject.tag)
+            {
+                //æ•µå¼¾ã«æ¥è§¦
                 case _LAYER_NAME_BULLET:
-                    //‹Câó‘Ô‚É
+                    //æ°—çµ¶çŠ¶æ…‹ã«
                     _stunTimeCount = _stunTime;
                     break;
 
@@ -94,13 +120,30 @@ namespace Karaki
             }
         }
 
-        /// <summary>
-        /// Cinemachine Virtual Camera ‚Ì Follow ‚É©•ª‚ğƒZƒbƒg‚·‚é
-        /// </summary>
+        /// <summary>Cinemachine Virtual Camera ã® Follow ã«è‡ªåˆ†ã‚’ã‚»ãƒƒãƒˆã™ã‚‹</summary>
         void FindCamera()
         {
             var vcam = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
             vcam.Follow = transform;
         }
+
+        /// <summary>(time)ç§’é–“ã€ç§»å‹•é€Ÿåº¦ãŒ(scale)å€ã«ãªã‚‹ã€‚(time)ç§’é–“çµŒéå¾Œã€å…ƒã®ç§»å‹•é€Ÿåº¦ã«æˆ»ã‚‹</summary>
+        /// <param name="scale">é€Ÿåº¦å€æ•°</param>
+        /// <param name="time">é€Ÿåº¦å€æ•°ãŒã‹ã‹ã‚Šç¶šã‘ã‚‹æ™‚é–“(s)</param>
+        public void Accelerate(float scale, float time)
+        {
+            //é€Ÿåº¦å€ç‡è¨­å®š
+            _speedUpRate = scale;
+            _speedUpTimeCount = time;
+        }
+
+        /// <summary>(time) ç§’é–“ã€æ“ä½œä¸èƒ½ã«ãªã‚‹</summary>
+        /// <param name="time">æ°—çµ¶æ™‚é–“(s)</param>
+        public void BeStunned(float time)
+        {
+            //æ°—çµ¶çŠ¶æ…‹ã«
+            _stunTimeCount = time;
+        }
+
     }
 }
