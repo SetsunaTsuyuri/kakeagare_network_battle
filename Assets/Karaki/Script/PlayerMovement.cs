@@ -36,6 +36,12 @@ namespace Karaki
         /// <summary>気絶時間をカウントするタイマー</summary>
         float _stunTimeCount = 0f;
 
+        /// <summary>移動速度UP倍率</summary>
+        float _speedUpRate = 1f;
+
+        /// <summary>移動速度UP時間をカウントするタイマー</summary>
+        float _speedUpTimeCount = 0f;
+
         PhotonView _view;
         Rigidbody2D _rb;
         bool _isGrounded = false;
@@ -63,9 +69,20 @@ namespace Karaki
                 return;
             }
 
+            //移動速度UP時間が残っていれば時間経過
+            if (_stunTimeCount > 0f)
+            {
+                _stunTimeCount -= Time.deltaTime;
+                //今の時間経過で0になったら速度倍率を1に戻す
+                if(_stunTimeCount < 0f)
+                {
+                    _speedUpTimeCount = 1f;
+                }
+            }
+
             float h = Input.GetAxisRaw(_INPUT_NAME_HORIZONTAL);
             Vector2 velocity = _rb.velocity;
-            velocity.x = _speed * h;
+            velocity.x = _speed * h * _speedUpTimeCount;
 
             if (Input.GetButtonDown(_INPUT_NAME_JUMP) && _isGrounded)
             {
@@ -109,5 +126,24 @@ namespace Karaki
             var vcam = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
             vcam.Follow = transform;
         }
+
+        /// <summary>(time)秒間、移動速度が(scale)倍になる。(time)秒間経過後、元の移動速度に戻る</summary>
+        /// <param name="scale">速度倍数</param>
+        /// <param name="time">速度倍数がかかり続ける時間(s)</param>
+        public void Accelerate(float scale, float time)
+        {
+            //速度倍率設定
+            _speedUpRate = scale;
+            _speedUpTimeCount = time;
+        }
+
+        /// <summary>(time) 秒間、操作不能になる</summary>
+        /// <param name="time">気絶時間(s)</param>
+        public void BeStunned(float time)
+        {
+            //気絶状態に
+            _stunTimeCount = time;
+        }
+
     }
 }
