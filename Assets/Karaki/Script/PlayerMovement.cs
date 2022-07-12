@@ -76,13 +76,13 @@ namespace Karaki
                 //今の時間経過で0になったら速度倍率を1に戻す
                 if(_stunTimeCount < 0f)
                 {
-                    _speedUpTimeCount = 1f;
+                    _speedUpRate = 1f;
                 }
             }
 
             float h = Input.GetAxisRaw(_INPUT_NAME_HORIZONTAL);
             Vector2 velocity = _rb.velocity;
-            velocity.x = _speed * h * _speedUpTimeCount;
+            velocity.x = _speed * h * _speedUpRate;
 
             if (Input.GetButtonDown(_INPUT_NAME_JUMP) && _isGrounded)
             {
