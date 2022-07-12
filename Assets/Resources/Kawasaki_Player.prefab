@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2432104478399584583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5183382556903275509}
+  m_Layer: 0
+  m_Name: MuzzlePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5183382556903275509
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2432104478399584583}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4418832730528756552}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &4418832730528755894
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,10 +43,11 @@ GameObject:
   - component: {fileID: 4418832730528755895}
   - component: {fileID: 5515297523517075022}
   - component: {fileID: 2920271983507777207}
-  - component: {fileID: 1025224233893050965}
   - component: {fileID: -7742254407856423556}
+  - component: {fileID: 1909813336306496832}
   - component: {fileID: 6581835969811370290}
   - component: {fileID: 3028448050447509243}
+  - component: {fileID: 7091588802379050530}
   m_Layer: 0
   m_Name: Kawasaki_Player
   m_TagString: Player
@@ -34,7 +66,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5183382556903275509}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -110,7 +143,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &2920271983507777207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,20 +167,6 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &1025224233893050965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4418832730528755894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffed7d1d413f77e4f8cf17ffd61de396, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 5
-  _jumpSpeed: 8
 --- !u!114 &-7742254407856423556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +179,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a8639feb21b9d449ad63d3ef070b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1909813336306496832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4418832730528755894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcd0e1c1ae1cd140a1fa6e4a93e3631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 5
+  _jumpSpeed: 8
+  _stunTime: 2
 --- !u!114 &6581835969811370290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,3 +226,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &7091588802379050530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4418832730528755894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a210fae7037982e4b9a6a59d033da2b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletPrefab: {fileID: 2924243226474174317, guid: 3269707c3c5c6f9468d2d177b20aded8, type: 3}
+  _muzzle: {fileID: 5183382556903275509}
+  _inputNameShoot: Fire1
