@@ -70,26 +70,29 @@ namespace Karaki
             }
 
             //移動速度UP時間が残っていれば時間経過
-            if (_stunTimeCount > 0f)
+            if (_speedUpTimeCount > 0f)
             {
-                _stunTimeCount -= Time.deltaTime;
+                _speedUpTimeCount -= Time.deltaTime;
                 //今の時間経過で0になったら速度倍率を1に戻す
-                if(_stunTimeCount < 0f)
+                if(_speedUpTimeCount < 0f)
                 {
                     _speedUpRate = 1f;
                 }
             }
 
+            //横移動
             float h = Input.GetAxisRaw(_INPUT_NAME_HORIZONTAL);
             Vector2 velocity = _rb.velocity;
             velocity.x = _speed * h * _speedUpRate;
 
+            //ジャンプ動作
             if (Input.GetButtonDown(_INPUT_NAME_JUMP) && _isGrounded)
             {
                 velocity.y = _jumpSpeed;
                 _isGrounded = false;
             }
 
+            //移動量を適用
             _rb.velocity = velocity;
         }
 
