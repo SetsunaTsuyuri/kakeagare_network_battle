@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Pool;
+using UnityEngine.Tilemaps;
 using Photon.Pun;
 
 namespace Kawasaki
@@ -12,8 +12,6 @@ namespace Kawasaki
     /// </summary>
     public class MapsManager : MonoBehaviour
     {
-        /// <summary>マップのプレハブをいくらおきに設置するか</summary>
-        [SerializeField] float _offsetY = 10f;
         /// <summary>KillZone のプレハブ名</summary>
         [SerializeField] string _killZonePrefabName;
         /// <summary>KillZone の初期位置</summary>
@@ -45,7 +43,12 @@ namespace Kawasaki
         /// 削除するマップIDのオフセット
         /// </summary>
         [SerializeField]
-        int _idOffsetOfmapToRemove = 2;
+        int _idOffsetOfMapToRemove = 2;
+
+        /// <summary>
+        /// マップの高さ
+        /// </summary>
+        float _mapsHeight = 0.0f;
 
         /// <summary>
         /// マップを作った数
@@ -99,23 +102,23 @@ namespace Kawasaki
             if (player.IsInTheLowestPosition)
             {
                 // マップを削除する
-                RemoveMap(map.Id - _idOffsetOfmapToRemove);
+                RemoveMap(map.Id - _idOffsetOfMapToRemove);
             }
-
         }
 
         /// <summary>
-        /// マップを増やす
+        /// マップを追加する
         /// </summary>
         public void AddMap()
         {
+            // マスタークライアントのみ実行できる
             if (!PhotonNetwork.IsMasterClient)
             {
                 return;
             }
 
             // 位置
-            Vector3 position = new(0.0f, MapCreationCount * _offsetY, 0.0f);
+            Vector3 position = new(0.0f, _mapsHeight, 0.0f);
 
             // プレハブ名
             int index = Random.Range(0, _mapPrefabNames.Length);
@@ -123,13 +126,44 @@ namespace Kawasaki
 
             // インスタンス
             GameObject instance = PhotonNetwork.Instantiate(prefabName, position, Quaternion.identity);
-            
+
             // マップのセットアップと同期を行う
             Map map = instance.GetComponent<Map>();
             map.SetUpAndSynchronize(MapCreationCount);
 
             // マップ作成数を増やす
             MapCreationCount++;
+
+            // マップの高さを更新する
+            UpdateMapsHeight(map);
+        }
+
+        /// <summary>
+        /// マップの高さを更新する
+        /// </summary>
+        /// <param name="addedMap">追加されたマップ</param>
+        private void UpdateMapsHeight(Map addedMap)
+        {
+            // マスタークライアントのみ実行できる
+            if (!PhotonNetwork.IsMasterClient)
+            {
+                return;
+            }
+
+            // マップが持つ最も高いタイルマップ
+            Tilemap tallest = addedMap
+                .GetComponentsInChildren<Tilemap>()
+                .OrderByDescending(x => x.cellBounds.yMax - x.cellBounds.yMin)
+                .FirstOrDefault();
+
+            float height = 0.0f;
+            if (tallest)
+            {
+                height = (tallest.cellBounds.yMax - tallest.cellBounds.yMin) * tallest.cellSize.y;
+            }
+
+            // マップの高さにそれを加える
+            _mapsHeight += height;
         }
 
         /// <summary>
