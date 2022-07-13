@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Items
   m_EditorClassIdentifier: 
   <AccelerationTime>k__BackingField: 5
-  <FaintingTime>k__BackingField: 1
+  <AccelerationScale>k__BackingField: 2
+  <StunningTime>k__BackingField: 1

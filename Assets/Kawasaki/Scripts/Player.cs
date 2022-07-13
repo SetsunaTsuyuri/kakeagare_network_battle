@@ -69,7 +69,7 @@ namespace Kawasaki
         /// <param name="time">効果時間</param>
         public void Accelerate(float scale, float time)
         {
-            // PlayerMovementの処理
+            Movement.Accelerate(scale, time);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Kawasaki
         /// <param name="time">効果時間</param>
         public void BeStunned(float time)
         {
-            // PlayerMovementの処理
+            Movement.BeStunned(time);
         }
     }
 }

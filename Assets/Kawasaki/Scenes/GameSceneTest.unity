@@ -564,14 +564,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e34432eaefc8145b5d29d8447cf41d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offsetY: 12
   _killZonePrefabName: Kawasaki_Killzone
   _killZoneInitialPosition: {x: 0, y: -8, z: 0}
   _mapPrefabNames:
   - Kawasaki_Map_0
   - Kawasaki_Map_1
   _initialMaps: 3
-  _idOffsetOfmapToRemove: 2
+  _idOffsetOfMapToRemove: 2
 --- !u!114 &1235557829
 MonoBehaviour:
   m_ObjectHideFlags: 0

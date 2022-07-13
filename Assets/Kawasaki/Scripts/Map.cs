@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Photon.Pun;
 
 namespace Kawasaki
@@ -20,12 +22,10 @@ namespace Kawasaki
         /// </summary>
         public bool CanAddMap { get; set; } = true;
 
+        /// <summary>
+        /// フォトンビュー
+        /// </summary>
         public PhotonView View { get; private set; } = null;
-
-        private void Awake()
-        {
-            View = GetComponent<PhotonView>();
-        }
 
         /// <summary>
         /// セットアップと同期を行う
@@ -46,31 +46,43 @@ namespace Kawasaki
         [PunRPC]
         public void SetUp(int id)
         {
+            // ID
             Id = id;
 
+            // 親トランスフォーム
             Transform parent = MapsManager.Current.MapsGrid.transform;
             transform.SetParent(parent);
+
+            // フォトンビュー
+            View = GetComponent<PhotonView>();
+
+            // タイルマップのセルバウンズを圧縮する
+            Tilemap[] tilemaps = GetComponentsInChildren<Tilemap>();
+            foreach (var map in tilemaps)
+            {
+                map.CompressBounds();
+            }
         }
 
         
         /// <summary>
-        /// マップを増やせるかどうか設定する
+        /// マップを増やせるかどうかの設定と同期を行う
         /// </summary>
         /// <param name="value"></param>
-        public void SetWhetherMapCanBeAdded(bool value)
+        public void SetWhetherMapCanBeAddedAndSynchronize(bool value)
         {
-            CanAddMap = value;
+            SetWhetherMapCanBeAdded(value);
 
             object[] parameters = { CanAddMap };
-            View.RPC(nameof(SynchronizeWhetherMapCanBeAdded), RpcTarget.Others, parameters);
+            View.RPC(nameof(SetWhetherMapCanBeAdded), RpcTarget.Others, parameters);
         }
 
         /// <summary>
-        /// マップを増やせるかどうかの設定を同期する
+        /// マップを増やせるかどうかを設定する
         /// </summary>
         /// <param name="value"></param>
         [PunRPC]
-        public void SynchronizeWhetherMapCanBeAdded(bool value)
+        public void SetWhetherMapCanBeAdded(bool value)
         {
             CanAddMap = value;
         }
