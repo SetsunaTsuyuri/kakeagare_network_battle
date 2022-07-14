@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1335443504252701091}
   - component: {fileID: 1335443504252701089}
   m_Layer: 0
-  m_Name: Kawasaki_KillZone
+  m_Name: KillZone
   m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

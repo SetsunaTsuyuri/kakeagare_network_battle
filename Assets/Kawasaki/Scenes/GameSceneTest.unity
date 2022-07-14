@@ -518,7 +518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4188b22cc2275f44c9520a0041bf71d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPrefabName: Kawasaki_Player
+  _playerPrefabName: Kawasaki/Player
   _spawnPositions:
   - {fileID: 1207530167}
   - {fileID: 1949884853}
@@ -564,11 +564,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e34432eaefc8145b5d29d8447cf41d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _killZonePrefabName: Kawasaki_Killzone
+  _killZonePrefabName: Kawasaki/Killzone
   _killZoneInitialPosition: {x: 0, y: -8, z: 0}
   _mapPrefabNames:
-  - Kawasaki_Map_0
-  - Kawasaki_Map_1
+  - Kawasaki/Map_0
+  - Kawasaki/Map_1
   _initialMaps: 3
   _idOffsetOfMapToRemove: 2
 --- !u!114 &1235557829

@@ -16,19 +16,25 @@ namespace Kawasaki
         public PhotonView PhotonView { get; private set; } = null;
 
         /// <summary>
-        /// プレイヤーの移動
-        /// </summary>
-        public Karaki.PlayerMovement Movement { get; private set; } = null;
-
-        /// <summary>
         /// 他のプレイヤーより低い位置にいる
         /// </summary>
         public bool IsInTheLowestPosition { get; set; } = false;
 
+        /// <summary>
+        /// プレイヤーの移動
+        /// </summary>
+        Karaki.PlayerMovement _movement = null;
+
+        /// <summary>
+        /// 初期の回転(Y軸)
+        /// </summary>
+        float _defaultRotationY = 0.0f;
+
         private void Awake()
         {
             PhotonView = GetComponent<PhotonView>();
-            Movement = GetComponent<Karaki.PlayerMovement>();
+            _movement = GetComponent<Karaki.PlayerMovement>();
+            _defaultRotationY = transform.rotation.y;
         }
 
         private void Start()
@@ -53,6 +59,39 @@ namespace Kawasaki
             }
         }
 
+        private void LateUpdate()
+        {
+            if (!PhotonView.IsMine)
+            {
+                return;
+            }
+
+            // 回転を更新する
+            UpdateRotation();
+        }
+
+        /// <summary>
+        /// 回転を更新する
+        /// </summary>
+        private void UpdateRotation()
+        {
+            // 左右の入力によって回転角度を変える
+            float axis = Input.GetAxisRaw("Horizontal");
+            if (axis != 0.0f)
+            {
+                Quaternion newRotation = transform.rotation;
+                if (axis > 0.0f)
+                {
+                    newRotation.y = _defaultRotationY;
+                }
+                else if (axis < 0.0f)
+                {
+                    newRotation.y = _defaultRotationY + 180.0f;
+                }
+                transform.rotation = newRotation;
+            }
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             IPlayerHit hit = collision.GetComponent<IPlayerHit>();
@@ -69,7 +108,7 @@ namespace Kawasaki
         /// <param name="time">効果時間</param>
         public void Accelerate(float scale, float time)
         {
-            Movement.Accelerate(scale, time);
+            _movement.Accelerate(scale, time);
         }
 
         /// <summary>
@@ -78,7 +117,7 @@ namespace Kawasaki
         /// <param name="time">効果時間</param>
         public void BeStunned(float time)
         {
-            Movement.BeStunned(time);
+            _movement.BeStunned(time);
         }
     }
 }
