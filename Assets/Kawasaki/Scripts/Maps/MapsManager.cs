@@ -20,7 +20,7 @@ namespace Kawasaki
         /// <summary>
         /// 現在のシーンに存在するインスタンス
         /// </summary>
-        public static MapsManager Current = null;
+        public static MapsManager Current { get; private set; } = null;
 
         /// <summary>
         /// マップのプレハブ名
@@ -88,7 +88,7 @@ namespace Kawasaki
         /// <param name="map">プレイヤーが触れたマップ</param>
         public void UpdateMaps(Player player, Map map)
         {
-            // マップが増やせる場合
+            // マップを増やせる場合
             if (map.CanAddMap)
             {
                 // マップを増やす
@@ -102,7 +102,8 @@ namespace Kawasaki
             if (player.IsInTheLowestPosition)
             {
                 // マップを削除する
-                RemoveMap(map.Id - _idOffsetOfMapToRemove);
+                int id = map.Id - _idOffsetOfMapToRemove;
+                RemoveMap(id);
             }
         }
 
@@ -144,12 +145,6 @@ namespace Kawasaki
         /// <param name="addedMap">追加されたマップ</param>
         private void UpdateMapsHeight(Map addedMap)
         {
-            // マスタークライアントのみ実行できる
-            if (!PhotonNetwork.IsMasterClient)
-            {
-                return;
-            }
-
             // マップが持つ最も高いタイルマップ
             Tilemap tallest = addedMap
                 .GetComponentsInChildren<Tilemap>()
@@ -170,8 +165,9 @@ namespace Kawasaki
         /// マップを削除する
         /// </summary>
         /// <param name="id">削除対象のID</param>
-        public void RemoveMap(int id)
+        private void RemoveMap(int id)
         {
+            // マスタークライアントのみ実行できる
             if (!PhotonNetwork.IsMasterClient)
             {
                 return;

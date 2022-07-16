@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2432104478399584583}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 0.2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 2920271983507777207}
   - component: {fileID: -7520928360507177613}
   - component: {fileID: 6581835969811370290}
+  - component: {fileID: -101354119661078909}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -208,7 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcd0e1c1ae1cd140a1fa6e4a93e3631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
+  _speed: 7.5
   _jumpSpeed: 12
   _stunTime: 2
 --- !u!114 &7091588802379050530
@@ -247,6 +248,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: -7520928360507177613}
   - {fileID: 6581835969811370290}
+  - {fileID: -101354119661078909}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -282,6 +284,48 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &-101354119661078909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4418832730528755894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 1
+    SynchronizeType: 1
+    Name: HorizontalAxisAbsolute
+  - Type: 9
+    SynchronizeType: 0
+    Name: Turned
+  - Type: 1
+    SynchronizeType: 1
+    Name: GroundDistance
+  - Type: 1
+    SynchronizeType: 1
+    Name: VelocityY
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsCrouch
+  - Type: 9
+    SynchronizeType: 0
+    Name: Damage
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsDead
+  - Type: 1
+    SynchronizeType: 1
+    Name: Stunned
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!1 &7397068093326613548
 GameObject:
   m_ObjectHideFlags: 0
