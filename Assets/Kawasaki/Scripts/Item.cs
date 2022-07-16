@@ -14,7 +14,7 @@ namespace Kawasaki
         /// アイテム設定
         /// </summary>
         [SerializeField]
-        ItemSettings _settings = null;
+        ItemsSettings _settings = null;
 
         public void OnHit(Player player)
         {

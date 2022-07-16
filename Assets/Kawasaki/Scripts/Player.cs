@@ -11,6 +11,12 @@ namespace Kawasaki
     public class Player : MonoBehaviour
     {
         /// <summary>
+        /// 足元のトランスフォーム
+        /// </summary>
+        [SerializeField]
+        Transform _foot = null;
+
+        /// <summary>
         /// フォトンビュー
         /// </summary>
         public PhotonView PhotonView { get; private set; } = null;
@@ -19,6 +25,16 @@ namespace Kawasaki
         /// 他のプレイヤーより低い位置にいる
         /// </summary>
         public bool IsInTheLowestPosition { get; set; } = false;
+
+        /// <summary>
+        /// リジッドボディ2D
+        /// </summary>
+        Rigidbody2D _rigidbody2D = null;
+
+        /// <summary>
+        /// アニメーター
+        /// </summary>
+        Animator _animator = null;
 
         /// <summary>
         /// プレイヤーの移動
@@ -33,6 +49,8 @@ namespace Kawasaki
         private void Awake()
         {
             PhotonView = GetComponent<PhotonView>();
+            _rigidbody2D = GetComponent<Rigidbody2D>();
+            _animator = GetComponent<Animator>();
             _movement = GetComponent<Karaki.PlayerMovement>();
             _defaultRotationY = transform.rotation.y;
         }
@@ -68,6 +86,30 @@ namespace Kawasaki
 
             // 回転を更新する
             UpdateRotation();
+
+            // アニメーターパラメーターを更新する
+            UpdateAnimatorParameters();
+        }
+
+        /// <summary>
+        /// アニメーターパラメーターを更新する
+        /// </summary>
+        private void UpdateAnimatorParameters()
+        {
+            float inputHorizontal = Mathf.Abs(Input.GetAxis("Horizontal"));
+            _animator.SetFloat("Speed", inputHorizontal);
+
+            float velocityY = _rigidbody2D.velocity.y;
+            _animator.SetFloat("VelocityY", velocityY);
+
+            float groundFromDistance = 0.0f;
+            RaycastHit2D hit = Physics2D.Raycast(_foot.position, Vector2.down);
+            if (hit.collider != null)
+            {
+                groundFromDistance = hit.distance;
+            }
+
+            _animator.SetFloat("GroundFromDistance", groundFromDistance);
         }
 
         /// <summary>

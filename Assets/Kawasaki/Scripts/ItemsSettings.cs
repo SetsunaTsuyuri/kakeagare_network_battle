@@ -8,7 +8,7 @@ namespace Kawasaki
     /// アイテムの設定
     /// </summary>
     [CreateAssetMenu(fileName = "Items", menuName =("Kawasaki/Settings/Items"))]
-    public class ItemSettings : ScriptableObject
+    public class ItemsSettings : ScriptableObject
     {
         /// <summary>
         /// 加速時間
