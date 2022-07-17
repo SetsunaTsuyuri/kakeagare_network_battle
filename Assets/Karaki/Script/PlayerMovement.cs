@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using Photon.Pun;
@@ -13,11 +11,6 @@ namespace Karaki
     public class PlayerMovement : MonoBehaviour
     {
         #region メンバ
-        /// <summary>水平移動の入力名</summary>
-        const string _INPUT_NAME_HORIZONTAL = "Horizontal";
-
-        /// <summary>ジャンプ操作の入力名</summary>
-        const string _INPUT_NAME_JUMP = "Jump";
 
         /// <summary>地面レイヤ名</summary>
         const string _LAYER_NAME_GROUND = "Ground";
@@ -55,10 +48,13 @@ namespace Karaki
         #region プロパティ
 
         /// <summary>気絶時間をカウントするタイマー</summary>
-        public float StunTimeCount { get => _stunTimeCount; set => _stunTimeCount = value; }
+        public float StunTimeCount { get => _stunTimeCount; }
 
         /// <summary>移動速度UP時間をカウントするタイマー</summary>
-        public float SpeedUpTimeCount { get => _speedUpTimeCount; set => _speedUpTimeCount = value; }
+        public float SpeedUpTimeCount { get => _speedUpTimeCount; }
+
+        /// <summary>true : 地面オブジェクトに接触している</summary>
+        public bool IsGrounded { get => _isGrounded; set => _isGrounded = value; }
 
         #endregion
 
@@ -112,19 +108,6 @@ namespace Karaki
 
             //移動量を適用
             _rb.velocity = velocity;
-        }
-
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            switch (collision.gameObject.tag)
-            {
-                //地面に接触
-                case _LAYER_NAME_GROUND:
-                    _isGrounded = true;
-                    break;
-
-                default: break;
-            }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
