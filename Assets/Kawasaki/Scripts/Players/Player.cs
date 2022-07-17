@@ -17,6 +17,12 @@ namespace Kawasaki
         Transform _foot = null;
 
         /// <summary>
+        /// レイキャストの距離
+        /// </summary>
+        [SerializeField]
+        float _raycastDistance = 0.01f;
+
+        /// <summary>
         /// フォトンビュー
         /// </summary>
         public PhotonView PhotonView { get; private set; } = null;
@@ -45,6 +51,11 @@ namespace Kawasaki
         /// バレットランチャー
         /// </summary>
         Karaki.BulletLauncher _bulletLauncher = null;
+
+        /// <summary>
+        /// 地上にいる
+        /// </summary>
+        bool _isGrounded = false;
 
         /// <summary>
         /// 初期の回転(Y軸)
@@ -108,6 +119,9 @@ namespace Kawasaki
             // 入力の更新処理
             UpdateInput();
 
+            // 地上フラグを更新する
+            UpdateGroundedFlag();
+
             // 移動の更新処理
             UpdateMove();
 
@@ -134,11 +148,35 @@ namespace Kawasaki
         }
 
         /// <summary>
+        /// 地上フラグを更新する
+        /// </summary>
+        private void UpdateGroundedFlag()
+        {
+            _isGrounded = false;
+ 
+            // 真下にレイを飛ばし、Groundタグのコライダーに命中したら地上フラグをtrueにする
+            RaycastHit2D[] hits = Physics2D.RaycastAll(_foot.position, Vector2.down, _raycastDistance);
+            foreach (var hit in hits)
+            {
+                if (hit.collider != null &&
+                    hit.collider.CompareTag("Ground"))
+                {
+                    _isGrounded = true;
+                    break;
+                }
+            }
+        }
+
+        /// <summary>
         /// 移動の更新処理
         /// </summary>
         private void UpdateMove()
         {
-            //_movement.Move(_horizontalAxisInput, _jumpInput);
+            // 移動
+            bool jump = _isGrounded && _jumpInput;            
+            _movement.Move(_horizontalAxisInput, jump);
+            
+            // Y軸回転
             _movement.SetRotationY(_defaultRotationY, _horizontalAxisInput);
         }
 
@@ -149,7 +187,7 @@ namespace Kawasaki
         {
             if (_fireInput)
             {
-                //_bulletLauncher.Fire();
+                _bulletLauncher.Fire();
             }
         }
 
@@ -166,15 +204,12 @@ namespace Kawasaki
             float velocityY = _rigidbody2D.velocity.y;
             _animator.SetFloat("VelocityY", velocityY);
 
-            // 地上距離
-            RaycastHit2D hit = Physics2D.Raycast(_foot.position, Vector2.down);
-            float groundDistance = hit.distance;
-            _animator.SetFloat("GroundDistance", groundDistance);
+            // 地上フラグ
+            _animator.SetBool("IsGrounded", _isGrounded);
 
             // 気絶時間
-            //float stunned = _movement.StunTimeCount;
-            float stunned = 0.0f;
-            _animator.SetFloat("Stunned", stunned);
+            float stunnedTime = _movement.StunTimeCount;
+            _animator.SetFloat("StunnedTime", stunnedTime);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

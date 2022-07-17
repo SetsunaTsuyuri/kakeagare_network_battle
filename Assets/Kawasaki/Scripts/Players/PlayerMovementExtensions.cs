@@ -17,11 +17,11 @@ namespace Kawasaki
         /// <param name="axisHorizontal">仮想軸(水平)</param>
         public static void SetRotationY(this Karaki.PlayerMovement playerMovement, float defaultRotationY, float axisHorizontal)
         {
-            //// 気絶時間が残っている場合は終了する
-            //if (playerMovement.StunTimeCount > 0.0f)
-            //{
-            //    return;
-            //}
+            // 気絶時間が残っている場合は終了する
+            if (playerMovement.StunTimeCount > 0.0f)
+            {
+                return;
+            }
 
             // 仮想軸(水平)の値に応じてY軸の角度を設定する
             if (axisHorizontal != 0.0f)

@@ -26,6 +26,6 @@ namespace Kawasaki
         /// 気絶時間
         /// </summary>
         [field: SerializeField]
-        public float StunningTime { get; private set; } = 1.0f;
+        public float StunnedTime { get; private set; } = 1.0f;
     }
 }
