@@ -12,6 +12,7 @@ namespace Karaki
     [RequireComponent(typeof(Rigidbody2D), typeof(PhotonView))]
     public class PlayerMovement : MonoBehaviour
     {
+        #region メンバ
         /// <summary>水平移動の入力名</summary>
         const string _INPUT_NAME_HORIZONTAL = "Horizontal";
 
@@ -44,7 +45,22 @@ namespace Karaki
 
         PhotonView _view;
         Rigidbody2D _rb;
+
+        /// <summary>true : 地面オブジェクトに接触している</summary>
         bool _isGrounded = false;
+
+        #endregion
+
+
+        #region プロパティ
+
+        /// <summary>気絶時間をカウントするタイマー</summary>
+        public float StunTimeCount { get => _stunTimeCount; set => _stunTimeCount = value; }
+
+        /// <summary>移動速度UP時間をカウントするタイマー</summary>
+        public float SpeedUpTimeCount { get => _speedUpTimeCount; set => _speedUpTimeCount = value; }
+
+        #endregion
 
         private void Start()
         {
@@ -57,7 +73,10 @@ namespace Karaki
             }
         }
 
-        private void Update()
+        /// <summary>プレイヤーキャラクターの移動を実施</summary>
+        /// <param name="horizontalMoveRate">水平移動入力値</param>
+        /// <param name="doJumpUp">ジャンプ用ボタンが押されたフラグ</param>
+        public void Move(float horizontalMoveRate, bool doJumpUp)
         {
             //自分のプレイヤーオブジェクトでなければ受け付けない
             if (!_view.IsMine) return;
@@ -81,12 +100,11 @@ namespace Karaki
             }
 
             //横移動
-            float h = Input.GetAxisRaw(_INPUT_NAME_HORIZONTAL);
             Vector2 velocity = _rb.velocity;
-            velocity.x = _speed * h * _speedUpRate;
+            velocity.x = _speed * horizontalMoveRate * _speedUpRate;
 
             //ジャンプ動作
-            if (Input.GetButtonDown(_INPUT_NAME_JUMP) && _isGrounded)
+            if (doJumpUp && _isGrounded)
             {
                 velocity.y = _jumpSpeed;
                 _isGrounded = false;

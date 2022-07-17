@@ -26,10 +26,10 @@ namespace Karaki
             _viewBullet = GetComponent<PhotonView>();
         }
 
-        void Update()
+        public void Fire()
         {
-            //ボタン押すたびに発射
-            if (Input.GetButtonDown(_inputNameShoot))
+            //このコンポーネントが自分のキャラのものなら弾を発射
+            if (_viewBullet.IsMine)
             {
                 if (_bulletPrefab != null)
                 {
