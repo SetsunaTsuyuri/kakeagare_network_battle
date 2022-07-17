@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _foot: {fileID: 5244028132641792913}
-  _raycastDistance: 0.01
+  _rayDistance: 0.01
 --- !u!114 &1909813336306496832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,9 +308,6 @@ MonoBehaviour:
     Name: Turned
   - Type: 1
     SynchronizeType: 1
-    Name: GroundDistance
-  - Type: 1
-    SynchronizeType: 1
     Name: VelocityY
   - Type: 4
     SynchronizeType: 0
@@ -323,7 +320,10 @@ MonoBehaviour:
     Name: IsDead
   - Type: 1
     SynchronizeType: 1
-    Name: Stunned
+    Name: StunnedTime
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsGrounded
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0

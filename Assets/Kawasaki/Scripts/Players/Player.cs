@@ -17,10 +17,10 @@ namespace Kawasaki
         Transform _foot = null;
 
         /// <summary>
-        /// レイキャストの距離
+        /// レイの距離
         /// </summary>
         [SerializeField]
-        float _raycastDistance = 0.01f;
+        float _rayDistance = 0.01f;
 
         /// <summary>
         /// フォトンビュー
@@ -51,11 +51,6 @@ namespace Kawasaki
         /// バレットランチャー
         /// </summary>
         Karaki.BulletLauncher _bulletLauncher = null;
-
-        /// <summary>
-        /// 地上にいる
-        /// </summary>
-        bool _isGrounded = false;
 
         /// <summary>
         /// 初期の回転(Y軸)
@@ -119,9 +114,6 @@ namespace Kawasaki
             // 入力の更新処理
             UpdateInput();
 
-            // 地上フラグを更新する
-            UpdateGroundedFlag();
-
             // 移動の更新処理
             UpdateMove();
 
@@ -148,36 +140,18 @@ namespace Kawasaki
         }
 
         /// <summary>
-        /// 地上フラグを更新する
-        /// </summary>
-        private void UpdateGroundedFlag()
-        {
-            _isGrounded = false;
- 
-            // 真下にレイを飛ばし、Groundタグのコライダーに命中したら地上フラグをtrueにする
-            RaycastHit2D[] hits = Physics2D.RaycastAll(_foot.position, Vector2.down, _raycastDistance);
-            foreach (var hit in hits)
-            {
-                if (hit.collider != null &&
-                    hit.collider.CompareTag("Ground"))
-                {
-                    _isGrounded = true;
-                    break;
-                }
-            }
-        }
-
-        /// <summary>
         /// 移動の更新処理
         /// </summary>
         private void UpdateMove()
         {
-            // 移動
-            bool jump = _isGrounded && _jumpInput;            
-            _movement.Move(_horizontalAxisInput, jump);
-            
+            // 地上フラグ更新
+            _movement.UpdateGroundedFlag(_foot.position, _rayDistance);
+
             // Y軸回転
             _movement.SetRotationY(_defaultRotationY, _horizontalAxisInput);
+
+            // 移動   
+            _movement.Move(_horizontalAxisInput, _jumpInput);
         }
 
         /// <summary>
@@ -205,7 +179,8 @@ namespace Kawasaki
             _animator.SetFloat("VelocityY", velocityY);
 
             // 地上フラグ
-            _animator.SetBool("IsGrounded", _isGrounded);
+            bool isGrounded = _movement.IsGrounded;
+            _animator.SetBool("IsGrounded", isGrounded);
 
             // 気絶時間
             float stunnedTime = _movement.StunTimeCount;
@@ -214,10 +189,10 @@ namespace Kawasaki
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            IPlayerHit other = collision.GetComponent<IPlayerHit>();
-            if (other is not null)
+            IPlayerHit hit = collision.GetComponent<IPlayerHit>();
+            if (hit is not null)
             {
-                other.OnHit(this);
+                hit.OnHit(this);
             }
         }
 
