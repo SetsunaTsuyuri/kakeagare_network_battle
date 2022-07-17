@@ -14,7 +14,7 @@ namespace Kawasaki
         /// アイテム設定
         /// </summary>
         [SerializeField]
-        ItemSettings _settings = null;
+        ItemsSettings _settings = null;
 
         public void OnHit(Player player)
         {
@@ -75,10 +75,10 @@ namespace Kawasaki
         private void Stun(Player player)
         {
             // テスト
-            Debug.Log($"{player}は{_settings.StunningTime}秒間動けない");
+            Debug.Log($"{player}は{_settings.StunnedTime}秒間動けない");
             player.GetComponent<SpriteRenderer>().color = Color.red;
 
-            float time = _settings.StunningTime;
+            float time = _settings.StunnedTime;
             player.BeStunned(time);
         }
     }

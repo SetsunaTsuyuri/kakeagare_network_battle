@@ -8,7 +8,7 @@ namespace Kawasaki
     /// アイテムの設定
     /// </summary>
     [CreateAssetMenu(fileName = "Items", menuName =("Kawasaki/Settings/Items"))]
-    public class ItemSettings : ScriptableObject
+    public class ItemsSettings : ScriptableObject
     {
         /// <summary>
         /// 加速時間
@@ -26,6 +26,6 @@ namespace Kawasaki
         /// 気絶時間
         /// </summary>
         [field: SerializeField]
-        public float StunningTime { get; private set; } = 1.0f;
+        public float StunnedTime { get; private set; } = 1.0f;
     }
 }
