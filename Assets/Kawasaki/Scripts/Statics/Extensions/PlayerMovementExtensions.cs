@@ -12,7 +12,7 @@ namespace Kawasaki
         /// <summary>
         /// BoxCastの大きさ
         /// </summary>
-        static readonly Vector2 s_boxCastSize = new(1.0f, 0.1f);
+        static readonly Vector2 s_boxCastSize = new(0.5f, 0.1f);
 
         /// <summary>
         /// 回転(Y軸)を設定する

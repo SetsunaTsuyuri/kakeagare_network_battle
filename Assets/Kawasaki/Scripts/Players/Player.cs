@@ -156,8 +156,12 @@ namespace Kawasaki
         /// </summary>
         private void UpdateMove()
         {
-            // 地上フラグ更新
-            _movement.UpdateGroundedFlag(_foot.position, _boxCastingResultsForGroundedFlag);
+            // 下方向に速度がある場合
+            if (_rigidbody2D.velocity.y <= 0.0f)
+            {
+                // 地上フラグ更新
+                _movement.UpdateGroundedFlag(_foot.position, _boxCastingResultsForGroundedFlag);
+            }
 
             // Y軸回転
             _movement.SetRotationY(_defaultRotationY, _horizontalAxisInput);

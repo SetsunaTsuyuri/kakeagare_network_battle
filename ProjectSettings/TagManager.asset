@@ -44,3 +44,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: MapBack
+    uniqueID: 4240987765
+    locked: 0
+  - name: Player
+    uniqueID: 616124213
+    locked: 0
+  - name: Object
+    uniqueID: 1595884699
+    locked: 0
+  - name: MapFront
+    uniqueID: 2347509967
+    locked: 0
