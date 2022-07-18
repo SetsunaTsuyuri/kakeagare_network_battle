@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 7.5
-  _jumpSpeed: 12
+  _jumpSpeed: 11.5
   _stunTime: 2
 --- !u!114 &7091588802379050530
 MonoBehaviour:
