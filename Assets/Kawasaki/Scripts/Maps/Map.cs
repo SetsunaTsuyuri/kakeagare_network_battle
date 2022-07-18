@@ -40,7 +40,7 @@ namespace Kawasaki
         }
 
         /// <summary>
-        /// セットアップを行う
+        /// セットアップする
         /// </summary>
         /// <param name="id">ID</param>
         [PunRPC]

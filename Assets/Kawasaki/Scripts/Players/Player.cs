@@ -68,14 +68,19 @@ namespace Kawasaki
         float _horizontalAxisInput = 0.0f;
 
         /// <summary>
+        /// 攻撃中である
+        /// </summary>
+        bool _isAttacking = false;
+
+        /// <summary>
         /// ジャンプの入力
         /// </summary>
         bool _jumpInput = false;
 
         /// <summary>
-        /// 射撃の入力
+        /// 攻撃の入力
         /// </summary>
-        bool _fireInput = false;
+        bool _attackInput = false;
 
         private void Awake()
         {
@@ -125,7 +130,7 @@ namespace Kawasaki
             UpdateMove();
 
             // 射撃の更新処理
-            UpdateFire();
+            UpdateAttack();
 
             // アニメーターパラメーターを更新する
             UpdateAnimatorParameters();
@@ -139,11 +144,11 @@ namespace Kawasaki
             // 仮想軸(水平)
             _horizontalAxisInput = Input.GetAxisRaw("Horizontal");
 
-            // ジャンプ
+            // ジャンプボタン
             _jumpInput = Input.GetButtonDown("Jump");
 
-            // 射撃
-            _fireInput = Input.GetButtonDown("Fire1");
+            // 攻撃ボタン
+            _attackInput = Input.GetButtonDown("Fire1");
         }
 
         /// <summary>
@@ -162,14 +167,39 @@ namespace Kawasaki
         }
 
         /// <summary>
-        /// 射撃の更新処理
+        /// 攻撃の更新処理
         /// </summary>
-        private void UpdateFire()
+        private void UpdateAttack()
         {
-            if (_fireInput)
+            if (_attackInput && CanAttack())
             {
-                _bulletLauncher.Fire();
+                StartAttack();
             }
+        }
+
+        /// <summary>
+        /// 攻撃を開始する
+        /// </summary>
+        private void StartAttack()
+        {
+            _isAttacking = true;
+            _animator.SetTrigger("Attack");
+        }
+
+        /// <summary>
+        /// 射撃時のアニメーションイベント
+        /// </summary>
+        public void OnFireAnimation()
+        {
+            _bulletLauncher.Fire();
+        }
+
+        /// <summary>
+        /// 攻撃終了時のアニメーションイベント
+        /// </summary>
+        public void OnAttackAnimationEnd()
+        {
+            _isAttacking = false;
         }
 
         /// <summary>
@@ -194,9 +224,23 @@ namespace Kawasaki
             _animator.SetFloat("StunnedTime", stunnedTime);
         }
 
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            Hit(collision.gameObject);
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            IPlayerHit hit = collision.GetComponent<IPlayerHit>();
+            Hit(collision.gameObject);
+        }
+
+        /// <summary>
+        /// 接触する
+        /// </summary>
+        /// <param name="other">接触したゲームオブジェクト</param>
+        private void Hit(GameObject other)
+        {
+            IPlayerHit hit = other.GetComponentInParent<IPlayerHit>();
             if (hit is not null)
             {
                 hit.OnHit(this);
@@ -210,6 +254,11 @@ namespace Kawasaki
         /// <param name="time">効果時間</param>
         public void Accelerate(float scale, float time)
         {
+            if (!PhotonView.IsMine)
+            {
+                return;
+            }
+
             _movement.Accelerate(scale, time);
         }
 
@@ -219,7 +268,34 @@ namespace Kawasaki
         /// <param name="time">効果時間</param>
         public void BeStunned(float time)
         {
+            if (!PhotonView.IsMine)
+            {
+                return;
+            }
+
+            _isAttacking = false;
+            _rigidbody2D.velocity = Vector2.zero;
+
             _movement.BeStunned(time);
+        }
+
+        /// <summary>
+        /// 攻撃可能である
+        /// </summary>
+        /// <returns></returns>
+        private bool CanAttack()
+        {
+            bool result = !_isAttacking && !IsStunned();
+            return result;
+        }
+
+        /// <summary>
+        /// 気絶している
+        /// </summary>
+        /// <returns></returns>
+        private bool IsStunned()
+        {
+            return _movement.StunTimeCount > 0.0f;
         }
     }
 }

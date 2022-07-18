@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 namespace Kawasaki
 {
@@ -40,6 +41,7 @@ namespace Kawasaki
         /// <param name="player"></param>
         private void ApplyGoodEffect(Player player)
         {
+            // 加速させる
             Accelerate(player);
         }
 

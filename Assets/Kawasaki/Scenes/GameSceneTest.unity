@@ -465,6 +465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _killZonePrefabName: Kawasaki/Killzone
   _killZoneInitialPosition: {x: 0, y: -8, z: 0}
+  _initialMapName: Kawasaki/Map_0
   _mapPrefabNames:
   - Kawasaki/Map_0
   - Kawasaki/Map_1
