@@ -196,8 +196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a8639feb21b9d449ad63d3ef070b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _settings: {fileID: 11400000, guid: 62309174761d1ba469e490048610ac4e, type: 2}
   _foot: {fileID: 5244028132641792913}
-  _rayDistance: 0.01
 --- !u!114 &1909813336306496832
 MonoBehaviour:
   m_ObjectHideFlags: 0

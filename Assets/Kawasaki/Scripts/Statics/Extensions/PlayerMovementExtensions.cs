@@ -10,6 +10,11 @@ namespace Kawasaki
     public static class PlayerMovementExtensions
     {
         /// <summary>
+        /// BoxCastの大きさ
+        /// </summary>
+        static readonly Vector2 s_boxCastSize = new(1.0f, 0.1f);
+
+        /// <summary>
         /// 回転(Y軸)を設定する
         /// </summary>
         /// <param name="playerMovement"></param>
@@ -43,21 +48,23 @@ namespace Kawasaki
         /// 地上フラグを更新する
         /// </summary>
         /// <param name="playerMovement"></param>
-        /// <param name="rayOrigin">レイの原点</param>
-        /// <param name="rayDistance">レイの距離</param>
-        public static void UpdateGroundedFlag(this Karaki.PlayerMovement playerMovement, Vector2 rayOrigin, float rayDistance)
+        /// <param name="origin">キャストの原点</param>
+        /// <param name="results">キャスト結果の配列</param>
+        public static void UpdateGroundedFlag(this Karaki.PlayerMovement playerMovement, Vector2 origin, RaycastHit2D[] results)
         {
             playerMovement.IsGrounded = false;
 
-            // 真下にレイを飛ばし、Groundタグのコライダーに命中したら地上フラグをtrueにする
-            RaycastHit2D[] hits = Physics2D.RaycastAll(rayOrigin, Vector2.down, rayDistance);
-            foreach (var hit in hits)
+            int hits = Physics2D.BoxCastNonAlloc(origin, s_boxCastSize, 0.0f, Vector2.zero, results, 0.0f);
+            if (hits > 0)
             {
-                if (hit.collider != null &&
-                    hit.collider.CompareTag("Ground"))
+                foreach (var result in results)
                 {
-                    playerMovement.IsGrounded = true;
-                    break;
+                    if (result.collider != null &&
+                        result.collider.CompareTag("Ground"))
+                    {
+                        playerMovement.IsGrounded = true;
+                        break;
+                    }
                 }
             }
         }

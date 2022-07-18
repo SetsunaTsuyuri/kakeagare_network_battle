@@ -11,16 +11,16 @@ namespace Kawasaki
     public class Player : MonoBehaviour
     {
         /// <summary>
+        /// 設定
+        /// </summary>
+        [SerializeField]
+        PlayersSettings _settings = null;
+
+        /// <summary>
         /// 足元のトランスフォーム
         /// </summary>
         [SerializeField]
         Transform _foot = null;
-
-        /// <summary>
-        /// レイの距離
-        /// </summary>
-        [SerializeField]
-        float _rayDistance = 0.01f;
 
         /// <summary>
         /// フォトンビュー
@@ -53,6 +53,11 @@ namespace Kawasaki
         Karaki.BulletLauncher _bulletLauncher = null;
 
         /// <summary>
+        /// 接地フラグ設定に使うボックスキャストの結果配列
+        /// </summary>
+        RaycastHit2D[] _boxCastingResultsForGroundedFlag = { };
+
+        /// <summary>
         /// 初期の回転(Y軸)
         /// </summary>
         float _defaultRotationY = 0.0f;
@@ -79,6 +84,8 @@ namespace Kawasaki
             _animator = GetComponent<Animator>();
             _movement = GetComponent<Karaki.PlayerMovement>();
             _bulletLauncher = GetComponent<Karaki.BulletLauncher>();
+
+            _boxCastingResultsForGroundedFlag = new RaycastHit2D[_settings.CastingResultsLength];
             _defaultRotationY = transform.rotation.y;
         }
 
@@ -145,7 +152,7 @@ namespace Kawasaki
         private void UpdateMove()
         {
             // 地上フラグ更新
-            _movement.UpdateGroundedFlag(_foot.position, _rayDistance);
+            _movement.UpdateGroundedFlag(_foot.position, _boxCastingResultsForGroundedFlag);
 
             // Y軸回転
             _movement.SetRotationY(_defaultRotationY, _horizontalAxisInput);
