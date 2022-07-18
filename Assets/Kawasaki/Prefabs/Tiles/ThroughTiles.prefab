@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3506666192772175436
+--- !u!1001 &4893747607036234399
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,11 +9,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4268697234304217369, guid: d596ecdc2a153db499ff5f3b2abc8441, type: 3}
       propertyPath: m_Name
-      value: GroundTiles
+      value: ThroughTiles
       objectReference: {fileID: 0}
-    - target: {fileID: 4268697234304217369, guid: d596ecdc2a153db499ff5f3b2abc8441, type: 3}
-      propertyPath: m_TagString
-      value: Ground
+    - target: {fileID: 5640284342777310549, guid: d596ecdc2a153db499ff5f3b2abc8441, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5640284342777310549, guid: d596ecdc2a153db499ff5f3b2abc8441, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1947457329
       objectReference: {fileID: 0}
     - target: {fileID: 8087204914873486225, guid: d596ecdc2a153db499ff5f3b2abc8441, type: 3}
       propertyPath: m_RootOrder
@@ -61,24 +65,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d596ecdc2a153db499ff5f3b2abc8441, type: 3}
---- !u!1 &835237231092016981 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4268697234304217369, guid: d596ecdc2a153db499ff5f3b2abc8441, type: 3}
-  m_PrefabInstance: {fileID: 3506666192772175436}
-  m_PrefabAsset: {fileID: 0}
---- !u!19719996 &7824669366828029611
-TilemapCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 835237231092016981}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_MaximumTileChangeCount: 1000
-  m_ExtrusionFactor: 0.00001

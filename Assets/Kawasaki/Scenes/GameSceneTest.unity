@@ -467,9 +467,9 @@ MonoBehaviour:
   _killZoneInitialPosition: {x: 0, y: -8, z: 0}
   _initialMapName: Kawasaki/Maps/Map_0
   _mapPrefabNames:
-  - Kawasaki/Maps/Map_0
   - Kawasaki/Maps/Map_1
   - Kawasaki/Maps/Map_2
+  - Kawasaki/Maps/Map_3
   _initialMaps: 3
   _idOffsetOfMapToRemove: 2
 --- !u!114 &1235557829
