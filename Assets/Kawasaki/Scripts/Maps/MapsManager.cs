@@ -12,18 +12,31 @@ namespace Kawasaki
     /// </summary>
     public class MapsManager : MonoBehaviour
     {
-        /// <summary>KillZone のプレハブ名</summary>
-        [SerializeField] string _killZonePrefabName;
-        /// <summary>KillZone の初期位置</summary>
-        [SerializeField] Vector3 _killZoneInitialPosition;
-
         /// <summary>
         /// 現在のシーンに存在するインスタンス
         /// </summary>
         public static MapsManager Current { get; private set; } = null;
 
         /// <summary>
-        /// マップのプレハブ名
+        /// キルゾーンのプレハブ名
+        /// </summary>
+        [SerializeField]
+        string _killZonePrefabName;
+
+        /// <summary>
+        /// KillZone の初期位置
+        /// </summary>
+        [SerializeField]
+        Vector3 _killZoneInitialPosition;
+
+        /// <summary>
+        /// 最初のマッププレハブ名
+        /// </summary>
+        [SerializeField]
+        string _initialMapName = string.Empty;
+
+        /// <summary>
+        /// マップのプレハブ名配列
         /// </summary>
         [SerializeField]
         string[] _mapPrefabNames = { };
@@ -67,6 +80,8 @@ namespace Kawasaki
         /// </summary>
         public void CreateMaps()
         {
+            AddMap(_initialMapName);
+
             for (int i = 0; i < _initialMaps; i++)
             {
                 AddMap();
@@ -118,15 +133,30 @@ namespace Kawasaki
                 return;
             }
 
+            // プレハブ名をランダムに選ぶ
+            int index = Random.Range(0, _mapPrefabNames.Length);
+            string prefabName = _mapPrefabNames[index];
+            AddMap(prefabName);
+
+        }
+
+        /// <summary>
+        /// マップを追加する
+        /// </summary>
+        /// <param name="mapPrefabName">マッププレハブ名</param>
+        public void AddMap(string mapPrefabName)
+        {
+            // マスタークライアントのみ実行できる
+            if (!PhotonNetwork.IsMasterClient)
+            {
+                return;
+            }
+
             // 位置
             Vector3 position = new(0.0f, _mapsHeight, 0.0f);
 
-            // プレハブ名
-            int index = Random.Range(0, _mapPrefabNames.Length);
-            string prefabName = _mapPrefabNames[index];
-
             // インスタンス
-            GameObject instance = PhotonNetwork.Instantiate(prefabName, position, Quaternion.identity);
+            GameObject instance = PhotonNetwork.Instantiate(mapPrefabName, position, Quaternion.identity);
 
             // マップのセットアップと同期を行う
             Map map = instance.GetComponent<Map>();
