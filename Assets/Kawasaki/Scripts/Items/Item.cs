@@ -11,7 +11,7 @@ namespace Kawasaki
     public class Item : MonoBehaviour, IPlayerHit
     {
         /// <summary>
-        /// アイテム設定
+        /// 設定
         /// </summary>
         [SerializeField]
         ItemsSettings _settings = null;
