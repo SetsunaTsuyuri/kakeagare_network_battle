@@ -48,22 +48,29 @@ namespace Kawasaki
         /// 地上フラグを更新する
         /// </summary>
         /// <param name="playerMovement"></param>
+        /// <param name="velocityY">Y軸速度</param>
         /// <param name="origin">キャストの原点</param>
         /// <param name="results">キャスト結果の配列</param>
-        public static void UpdateGroundedFlag(this Karaki.PlayerMovement playerMovement, Vector2 origin, RaycastHit2D[] results)
+        public static void UpdateGroundedFlag(this Karaki.PlayerMovement playerMovement, float velocityY, Vector2 origin, RaycastHit2D[] results)
         {
             playerMovement.IsGrounded = false;
 
-            int hits = Physics2D.BoxCastNonAlloc(origin, s_boxCastSize, 0.0f, Vector2.zero, results, 0.0f);
-            if (hits > 0)
+            // 下方向の速度が0以下の場合
+            if (velocityY <= 0.0f)
             {
-                foreach (var result in results)
+                // ボックスキャストを行う
+                int hits = Physics2D.BoxCastNonAlloc(origin, s_boxCastSize, 0.0f, Vector2.zero, results, 0.0f);
+                if (hits > 0)
                 {
-                    if (result.collider != null &&
-                        result.collider.CompareTag("Ground"))
+                    // Groundタグに命中した場合、地上にいるものとする
+                    foreach (var result in results)
                     {
-                        playerMovement.IsGrounded = true;
-                        break;
+                        if (result.collider != null &&
+                            result.collider.CompareTag("Ground"))
+                        {
+                            playerMovement.IsGrounded = true;
+                            break;
+                        }
                     }
                 }
             }

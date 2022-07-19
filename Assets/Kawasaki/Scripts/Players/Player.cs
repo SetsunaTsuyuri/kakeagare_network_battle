@@ -8,7 +8,7 @@ namespace Kawasaki
     /// <summary>
     /// プレイヤー
     /// </summary>
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour, IStunned, IItemObtainer
     {
         /// <summary>
         /// 設定
@@ -156,11 +156,10 @@ namespace Kawasaki
         /// </summary>
         private void UpdateMove()
         {
-            // 下方向に速度がある場合
+            // 地上フラグ更新
             if (_rigidbody2D.velocity.y <= 0.0f)
             {
-                // 地上フラグ更新
-                _movement.UpdateGroundedFlag(_foot.position, _boxCastingResultsForGroundedFlag);
+                _movement.UpdateGroundedFlag(_rigidbody2D.velocity.y, _foot.position, _boxCastingResultsForGroundedFlag);
             }
 
             // Y軸回転
@@ -255,22 +254,18 @@ namespace Kawasaki
         /// 加速する
         /// </summary>
         /// <param name="scale">加速倍率</param>
-        /// <param name="time">効果時間</param>
-        public void Accelerate(float scale, float time)
+        /// <param name="duration">持続時間</param>
+        public void Accelerate(float scale, float duration)
         {
             if (!PhotonView.IsMine)
             {
                 return;
             }
 
-            _movement.Accelerate(scale, time);
+            _movement.Accelerate(scale, duration);
         }
 
-        /// <summary>
-        /// 気絶する
-        /// </summary>
-        /// <param name="time">効果時間</param>
-        public void BeStunned(float time)
+        public void BeStunned(float duration)
         {
             if (!PhotonView.IsMine)
             {
@@ -280,8 +275,56 @@ namespace Kawasaki
             _isAttacking = false;
             _rigidbody2D.velocity = Vector2.zero;
 
-            _movement.BeStunned(time);
+            _movement.BeStunned(duration);
         }
+
+        public void Obtain(Item item)
+        {
+            if (!PhotonView.IsMine)
+            {
+                return;
+            }
+
+            // 最も低い位置にいる場合
+            if (IsInTheLowestPosition)
+            {
+                // 有利な効果を適用する
+                ApplyGoodEffect(item);
+            }
+            else
+            {
+                // 不利な効果を適用する
+                ApplyBadEffect(item);
+            }
+
+            // アイテムを破壊する
+            Destroy(item.gameObject);
+
+        }
+
+        /// <summary>
+        /// 良い効果を適用する
+        /// </summary>
+        /// <param name="item">入手したアイテム</param>
+        private void ApplyGoodEffect(Item item)
+        {
+            // 加速する
+            float scale = item.Settings.AccelerationScale;
+            float duration = item.Settings.AccelerationDuration;
+            Accelerate(scale, duration);
+        }
+
+        /// <summary>
+        /// 悪い効果を適用する
+        /// </summary>
+        /// <param name="item">入手したアイテム</param>
+        private void ApplyBadEffect(Item item)
+        {
+            // 気絶する
+            float duration = item.Settings.StunnedDutation;
+            BeStunned(duration);
+        }
+
 
         /// <summary>
         /// 攻撃可能である
