@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Kawasaki
+{
+    /// <summary>
+    /// 揺れるもの
+    /// </summary>
+    public class Swinger : Mover
+    {
+        /// <summary>
+        /// 移動先
+        /// </summary>
+        [SerializeField]
+        Vector2 _destination = Vector2.zero;
+
+        /// 初期位置
+        /// </summary>
+        Vector2 _initialPosition = Vector2.zero;
+
+        float _actualSpeed = 0.0f;
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            _initialPosition = transform.position;
+            _actualSpeed = _speed / _destination.magnitude;
+        }
+
+        private void FixedUpdate()
+        {
+            Vector2 position = _initialPosition;
+            position.x += _destination.x * Mathf.Sin(_actualSpeed * Time.time);
+            position.y += _destination.y * Mathf.Sin(_actualSpeed * Time.time);
+
+            _rigidbody2D.MovePosition(position);
+        }
+    }
+}
