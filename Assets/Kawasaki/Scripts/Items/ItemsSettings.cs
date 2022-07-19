@@ -14,7 +14,7 @@ namespace Kawasaki
         /// 加速時間
         /// </summary>
         [field: SerializeField]
-        public float AccelerationTime { get; private set; } = 5.0f;
+        public float AccelerationDuration { get; private set; } = 5.0f;
 
         /// <summary>
         /// 加速倍率
@@ -26,6 +26,6 @@ namespace Kawasaki
         /// 気絶時間
         /// </summary>
         [field: SerializeField]
-        public float StunnedTime { get; private set; } = 1.0f;
+        public float StunnedDutation { get; private set; } = 1.0f;
     }
 }

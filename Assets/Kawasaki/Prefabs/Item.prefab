@@ -114,4 +114,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c655151b86e4d5e4bbb535a97db3c53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settings: {fileID: 11400000, guid: 30631b8ba144ac94e84079d432c7a616, type: 2}
+  <Settings>k__BackingField: {fileID: 11400000, guid: 30631b8ba144ac94e84079d432c7a616, type: 2}

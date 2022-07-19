@@ -1,41 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
 namespace Kawasaki
 {
     /// <summary>
-    /// アイテム
+    /// プレイヤーを気絶させるもの
     /// </summary>
-    public class Item : MonoBehaviour
+    public class Stunner : MonoBehaviour
     {
         /// <summary>
-        /// 設定
+        /// 気絶させる時間
         /// </summary>
-        [field: SerializeField]
-        public ItemsSettings Settings { get; private set; } = null;
+        [SerializeField]
+        float duration = 0.0f;
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            BeObtained(collision.gameObject);
+            Stun(collision.gameObject);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            BeObtained(collision.gameObject);
+            Stun(collision.gameObject);
         }
 
         /// <summary>
-        /// 獲得される
+        /// 気絶させる
         /// </summary>
         /// <param name="other">接触したゲームオブジェクト</param>
-        private void BeObtained(GameObject other)
+        private void Stun(GameObject other)
         {
-            IItemObtainer obtainer = other.GetComponentInParent<IItemObtainer>();
-            if (obtainer is not null)
+            IStunned stunned = other.GetComponentInParent<IStunned>();
+            if (stunned is not null)
             {
-                obtainer.Obtain(this);
+                stunned.BeStunned(duration);
             }
         }
     }

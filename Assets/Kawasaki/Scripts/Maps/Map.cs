@@ -27,6 +27,12 @@ namespace Kawasaki
         /// </summary>
         public PhotonView View { get; private set; } = null;
 
+        public void OnHit(Player player)
+        {
+            // マップを更新する
+            MapsManager.Current.UpdateMaps(player, this);
+        }
+
         /// <summary>
         /// セットアップと同期を行う
         /// </summary>
@@ -85,11 +91,6 @@ namespace Kawasaki
         public void SetWhetherMapCanBeAdded(bool value)
         {
             CanAddMap = value;
-        }
-
-        public void OnHit(Player player)
-        {
-            MapsManager.Current.UpdateMaps(player, this);
         }
     }
 }
