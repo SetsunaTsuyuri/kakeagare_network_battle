@@ -34,6 +34,11 @@ namespace Kawasaki
 
         private void FixedUpdate()
         {
+            if (destinations.Length == 0)
+            {
+                return;
+            }
+
             // 目的地
             Vector3 destination = _initialPosition + destinations[_destinationIndex];
 

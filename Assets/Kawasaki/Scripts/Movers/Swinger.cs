@@ -19,6 +19,9 @@ namespace Kawasaki
         /// </summary>
         Vector2 _initialPosition = Vector2.zero;
 
+        /// <summary>
+        /// 実際の速度
+        /// </summary>
         float _actualSpeed = 0.0f;
 
         protected override void Awake()
@@ -26,7 +29,12 @@ namespace Kawasaki
             base.Awake();
 
             _initialPosition = transform.position;
-            _actualSpeed = _speed / _destination.magnitude;
+
+            float magnitude = _destination.magnitude;
+            if (magnitude > 0.0f)
+            {
+                _actualSpeed = _speed / magnitude;
+            }
         }
 
         private void FixedUpdate()

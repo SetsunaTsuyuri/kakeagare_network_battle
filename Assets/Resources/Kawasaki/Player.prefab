@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5183382556903275509}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MuzzlePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ GameObject:
   - component: {fileID: -7520928360507177613}
   - component: {fileID: 6581835969811370290}
   - component: {fileID: -101354119661078909}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a210fae7037982e4b9a6a59d033da2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 2924243226474174317, guid: 3269707c3c5c6f9468d2d177b20aded8, type: 3}
+  _bulletPrefab: {fileID: 2924243226474174317, guid: 9c063e92d5f7bb04aad4052e708a9b75, type: 3}
   _muzzle: {fileID: 5183382556903275509}
   _inputNameShoot: Fire1
 --- !u!114 &2920271983507777207
@@ -339,7 +339,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5244028132641792913}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
