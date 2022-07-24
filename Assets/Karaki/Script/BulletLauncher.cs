@@ -8,14 +8,11 @@ namespace Karaki
     public class BulletLauncher : MonoBehaviour
     {
         #region メンバ
-        [SerializeField, Tooltip("使用する弾のプレハブ")]
-        GameObject _bulletPrefab = null;
+        [SerializeField, Tooltip("使用する弾のプレハブ名")]
+        string _bulletPrefab = "Bullet";
 
         [SerializeField, Tooltip("弾を射出する場所")]
         Transform _muzzle = null;
-
-        [SerializeField, Tooltip("入力ボタン名 : 弾を撃つ")]
-        string _inputNameShoot = "Fire1";
 
         /// <summary>発射弾の情報を連携させるためのコンポーネント</summary>
         PhotonView _viewBullet = null;
@@ -31,10 +28,11 @@ namespace Karaki
             //このコンポーネントが自分のキャラのものなら弾を発射
             if (_viewBullet.IsMine)
             {
-                if (_bulletPrefab != null)
+                if (_bulletPrefab != null && _bulletPrefab.Length > 0)
                 {
-                    // ネットワークオブジェクトとして生成する
-                    PhotonNetwork.Instantiate(_bulletPrefab.name, _muzzle.position, _muzzle.rotation);
+                    // 自分の弾をネットワークオブジェクトとして生成する
+                    GameObject bullet = PhotonNetwork.Instantiate(_bulletPrefab, _muzzle.position, _muzzle.rotation);
+                    bullet.GetComponent<BulletMovement>().IsMine = true;
                 }
             }
         }

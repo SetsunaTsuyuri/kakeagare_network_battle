@@ -11,13 +11,6 @@ namespace Karaki
     public class PlayerMovement : MonoBehaviour
     {
         #region メンバ
-
-        /// <summary>地面レイヤ名</summary>
-        const string _LAYER_NAME_GROUND = "Ground";
-
-        /// <summary>弾レイヤ名</summary>
-        const string _LAYER_NAME_BULLET = "Bullet";
-
         [SerializeField, Tooltip("プレイヤーの移動速度")] 
         float _speed = 5f;
 
@@ -109,21 +102,7 @@ namespace Karaki
             //移動量を適用
             _rb.velocity = velocity;
         }
-
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            switch (collision.gameObject.tag)
-            {
-                //敵弾に接触
-                case _LAYER_NAME_BULLET:
-                    //気絶状態に
-                    _stunTimeCount = _stunTime;
-                    break;
-
-                default: break;
-            }
-        }
-
+                
         /// <summary>Cinemachine Virtual Camera の Follow に自分をセットする</summary>
         void FindCamera()
         {
