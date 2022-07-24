@@ -225,9 +225,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a210fae7037982e4b9a6a59d033da2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 2924243226474174317, guid: 9c063e92d5f7bb04aad4052e708a9b75, type: 3}
+  _bulletPrefab: Kawasaki/Bullet
   _muzzle: {fileID: 5183382556903275509}
-  _inputNameShoot: Fire1
 --- !u!114 &2920271983507777207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,7 +353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7397068093326613548}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.02, y: -0.297, z: 0}
+  m_LocalPosition: {x: -0.02, y: -0.265, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

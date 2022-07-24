@@ -16,8 +16,9 @@ GameObject:
   - component: {fileID: 2345281203101967221}
   - component: {fileID: -6814983502055585827}
   - component: {fileID: -1241090899811088802}
+  - component: {fileID: -6804030740322606995}
   m_Layer: 0
-  m_Name: Kawasaki_Bullet
+  m_Name: Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletSpeed: 5
   _lifeTime: 10
+  _TagNameMap: Map
 --- !u!114 &7874943316502986882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,3 +194,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9265e7a2bc204954fbfe8f2e57d04910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6804030740322606995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2924243226474174317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6062451d8cb928a4ebebe6714c0b892f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 1.5
