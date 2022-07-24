@@ -470,6 +470,7 @@ MonoBehaviour:
   - Kawasaki/Maps/Map_1
   - Kawasaki/Maps/Map_2
   - Kawasaki/Maps/Map_3
+  - Kawasaki/Maps/Map_4
   _initialMaps: 3
   _idOffsetOfMapToRemove: 2
 --- !u!114 &1235557829
