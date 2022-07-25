@@ -109,6 +109,8 @@ namespace Kawasaki
             if (PhotonView.IsMine)
             {
                 MapsManager.Current.CreateMaps();
+                //MapsManager.Current.CreateKillZone();
+
             }
             else  // 2人目が入ってきた時にキルゾーンを生成する
             {

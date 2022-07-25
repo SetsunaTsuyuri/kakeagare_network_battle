@@ -27,8 +27,8 @@ public class KillZone : MonoBehaviour
         // ゲームオーバーになったら動かさない
         if (!_isGameOver && _view.IsMine)
         {
-            transform.Translate(0, _initialSpeed, 0);
-            _initialSpeed += _acceleration;
+            //transform.Translate(0, _initialSpeed, 0);
+            //_initialSpeed += _acceleration;
         }
     }
 

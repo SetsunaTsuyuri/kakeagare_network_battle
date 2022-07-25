@@ -56,3 +56,6 @@ TagManager:
   - name: MapFront
     uniqueID: 2347509967
     locked: 0
+  - name: KillZone
+    uniqueID: 2581064521
+    locked: 0
