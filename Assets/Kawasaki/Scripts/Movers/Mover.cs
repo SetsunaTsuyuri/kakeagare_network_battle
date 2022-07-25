@@ -17,6 +17,15 @@ namespace Kawasaki
         protected float _speed = 0.0f;
 
         /// <summary>
+        /// 速度
+        /// </summary>
+        public float Speed
+        {
+            get => _speed;
+            set => _speed = value;
+        }
+
+        /// <summary>
         /// リジッドボディ2D
         /// </summary>
         protected Rigidbody2D _rigidbody2D = null;
