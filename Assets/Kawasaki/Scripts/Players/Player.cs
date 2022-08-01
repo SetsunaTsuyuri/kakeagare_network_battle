@@ -33,6 +33,11 @@ namespace Kawasaki
         public bool IsInTheLowestPosition { get; set; } = false;
 
         /// <summary>
+        /// 順位
+        /// </summary>
+        public int Rank { get; set; } = 0;
+
+        /// <summary>
         /// リジッドボディ2D
         /// </summary>
         Rigidbody2D _rigidbody2D = null;
@@ -282,7 +287,7 @@ namespace Kawasaki
 
         public void Obtain(Item item)
         {
-            if (!PhotonView.IsMine)
+            if (PhotonView.IsMine)
             {
                 // 最も低い位置にいる場合
                 if (IsInTheLowestPosition)
