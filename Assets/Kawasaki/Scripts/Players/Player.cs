@@ -284,24 +284,21 @@ namespace Kawasaki
         {
             if (!PhotonView.IsMine)
             {
-                return;
-            }
-
-            // 最も低い位置にいる場合
-            if (IsInTheLowestPosition)
-            {
-                // 有利な効果を適用する
-                ApplyGoodEffect(item);
-            }
-            else
-            {
-                // 不利な効果を適用する
-                ApplyBadEffect(item);
+                // 最も低い位置にいる場合
+                if (IsInTheLowestPosition)
+                {
+                    // 有利な効果を適用する
+                    ApplyGoodEffect(item);
+                }
+                else
+                {
+                    // 不利な効果を適用する
+                    ApplyBadEffect(item);
+                }
             }
 
             // アイテムを破壊する
             Destroy(item.gameObject);
-
         }
 
         /// <summary>
