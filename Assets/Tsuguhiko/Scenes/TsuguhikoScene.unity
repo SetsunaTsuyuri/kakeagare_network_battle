@@ -248,10 +248,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rank
+  m_text: "\u9806\u4F4D"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f25dc60187252dd49a53851843791525, type: 2}
+  m_sharedMaterial: {fileID: 3857925773891161501, guid: f25dc60187252dd49a53851843791525, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -407,6 +407,7 @@ GameObject:
   - component: {fileID: 932411475}
   - component: {fileID: 932411474}
   - component: {fileID: 932411478}
+  - component: {fileID: 932411479}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -509,6 +510,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rankText: {fileID: 558521141}
+  _playerRank: 1
+--- !u!114 &932411479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932411473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &974175915
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,42 +4,52 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun;
 
-public class RankDisplay : MonoBehaviourPunCallbacks, IPunObservable
+namespace Tsuguhiko
 {
-    [SerializeField, Header("ランクのテキスト")] TextMeshProUGUI _rankText;
-
-    Rank _playerRank;
-
-
-
-    void Start()
+    public class RankDisplay : MonoBehaviourPunCallbacks
     {
+        [SerializeField, Header("ランクのテキスト")] TextMeshProUGUI _rankText;
 
-    }
-    void Update()
-    {
-        if (photonView.IsMine)
+        [SerializeField,Header("ランク")] Rank _playerRank;
+
+        PhotonView _viewRank;
+
+        void Start()
         {
-            if (_playerRank == Rank.First)
+            _viewRank = GetComponent<PhotonView>();
+        }
+
+        
+        void Update()
+        {
+            
+            if (photonView.IsMine)
             {
-                _rankText.text = "1st";
-            }
-            else if (_playerRank == Rank.Second)
-            {
-                _rankText.text = "2nd";
-            }
-        }
-    }
+                if (_playerRank == Rank.First)
+                {
+                    _rankText.text = "1st";
 
-    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(_rankText);
+                    _rankText.color = Color.blue;
+                }
+                else if (_playerRank == Rank.Second)
+                {
+                    _rankText.text = "2nd";
+
+                    _rankText.color = Color.red;
+                }
+            }
         }
-        else
-        {
-            _rankText = (TextMeshProUGUI)stream.ReceiveNext();
-        }
+
+        //void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        //{
+        //    if (stream.IsWriting)
+        //    {
+        //        stream.SendNext(_rankText);
+        //    }
+        //    else
+        //    {
+        //        _rankText = (TextMeshProUGUI)stream.ReceiveNext();
+        //    }
+        //}
     }
 }
