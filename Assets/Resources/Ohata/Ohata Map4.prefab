@@ -135,7 +135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 110396307222833601, guid: 70d302da4d7cd534aaae2644e15bcea7, type: 3}
       propertyPath: m_Tiles.Array.size
-      value: 48
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 110396307222833601, guid: 70d302da4d7cd534aaae2644e15bcea7, type: 3}
       propertyPath: m_TileAssetArray.Array.size
@@ -459,7 +459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 110396307222833601, guid: 70d302da4d7cd534aaae2644e15bcea7, type: 3}
       propertyPath: m_Tiles.Array.data[44].first.x
-      value: -11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 110396307222833601, guid: 70d302da4d7cd534aaae2644e15bcea7, type: 3}
       propertyPath: m_Tiles.Array.data[44].first.y
@@ -471,11 +471,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 110396307222833601, guid: 70d302da4d7cd534aaae2644e15bcea7, type: 3}
       propertyPath: m_Tiles.Array.data[45].first.y
-      value: 17
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 110396307222833601, guid: 70d302da4d7cd534aaae2644e15bcea7, type: 3}
       propertyPath: m_Tiles.Array.data[46].first.x
-      value: -11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 110396307222833601, guid: 70d302da4d7cd534aaae2644e15bcea7, type: 3}
       propertyPath: m_Tiles.Array.data[46].first.y
@@ -508,7 +508,7 @@ PrefabInstance:
     - target: {fileID: 110396307222833601, guid: 70d302da4d7cd534aaae2644e15bcea7, type: 3}
       propertyPath: m_TileAssetArray.Array.data[7].m_Data
       value: 
-      objectReference: {fileID: 11400000, guid: 6632f60948d7238408c39d36ad1310ec, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 110396307222833601, guid: 70d302da4d7cd534aaae2644e15bcea7, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[3].m_Data
       value: 
@@ -528,7 +528,7 @@ PrefabInstance:
     - target: {fileID: 110396307222833601, guid: 70d302da4d7cd534aaae2644e15bcea7, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[7].m_Data
       value: 
-      objectReference: {fileID: -8849650766351124748, guid: fc584d329b77b9545b9c9c8bb829e553, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 110396307222833601, guid: 70d302da4d7cd534aaae2644e15bcea7, type: 3}
       propertyPath: m_Tiles.Array.data[0].second.m_TileIndex
       value: 3
@@ -559,11 +559,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 110396307222833601, guid: 70d302da4d7cd534aaae2644e15bcea7, type: 3}
       propertyPath: m_TileAssetArray.Array.data[7].m_RefCount
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 110396307222833601, guid: 70d302da4d7cd534aaae2644e15bcea7, type: 3}
       propertyPath: m_TileColorArray.Array.data[0].m_RefCount
-      value: 48
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 110396307222833601, guid: 70d302da4d7cd534aaae2644e15bcea7, type: 3}
       propertyPath: m_Tiles.Array.data[10].second.m_TileIndex
@@ -719,7 +719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 110396307222833601, guid: 70d302da4d7cd534aaae2644e15bcea7, type: 3}
       propertyPath: m_TileMatrixArray.Array.data[0].m_RefCount
-      value: 48
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 110396307222833601, guid: 70d302da4d7cd534aaae2644e15bcea7, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[3].m_RefCount
@@ -739,7 +739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 110396307222833601, guid: 70d302da4d7cd534aaae2644e15bcea7, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[7].m_RefCount
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 110396307222833601, guid: 70d302da4d7cd534aaae2644e15bcea7, type: 3}
       propertyPath: m_Tiles.Array.data[10].second.m_AllTileFlags
