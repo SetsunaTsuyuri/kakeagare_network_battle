@@ -22,22 +22,24 @@ namespace Tsuguhiko
         
         void Update()
         {
-            
-            if (photonView.IsMine)
+            Kawasaki.Player myPlayer = Kawasaki.PlayersManager.Current.GetMyPlayer();
+
+            if (myPlayer)
             {
-                if (_playerRank == Rank.First)
+                if (myPlayer.Rank == 1)
                 {
                     _rankText.text = "1st";
 
                     _rankText.color = Color.blue;
                 }
-                else if (_playerRank == Rank.Second)
+                else if (myPlayer.Rank == 2)
                 {
                     _rankText.text = "2nd";
 
                     _rankText.color = Color.red;
                 }
             }
+            
         }
 
         //void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
