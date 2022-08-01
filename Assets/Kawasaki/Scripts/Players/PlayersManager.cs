@@ -27,22 +27,36 @@ namespace Kawasaki
 
         private void LateUpdate()
         {
+            if (!_players.Any())
+            {
+                return;
+            }
+
             // 最下位フラグを全てOFFにする
             foreach (var player in _players)
             {
                 player.IsInTheLowestPosition = false;
             }
 
-            // 最も低い位置にいるプレイヤーの最下位フラグをONにする
-            Player lowest = _players
+            // 高い位置にいる順に並んだプレイヤー配列
+            Player[] ranking = _players
                 .Where(x => x != null)
-                .OrderBy(x => x.transform.position.y)
-                .FirstOrDefault();
+                .OrderByDescending(x => x.transform.position.y)
+                .ToArray();
 
+            // プレイヤーの順位を設定する
+            for (int i = 0; i < ranking.Length; i++)
+            {
+                ranking[i].Rank = i + 1;
+            }
+
+            // 最も低い位置にいるプレイヤーの最下位フラグをONにする
+            Player lowest = ranking.Last();
             if (lowest)
             {
                 lowest.IsInTheLowestPosition = true;
             }
+
         }
 
         /// <summary>
@@ -52,6 +66,18 @@ namespace Kawasaki
         public void Register(Player player)
         {
             _players.Add(player);
+        }
+
+        /// <summary>
+        /// クライアントが操作するプレイヤーを取得する
+        /// </summary>
+        /// <returns></returns>
+        public Player GetMyPlayer()
+        {
+            Player player = _players
+                .FirstOrDefault(x => x.PhotonView.IsMine);
+
+            return player;
         }
     }
 
