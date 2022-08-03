@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -83,19 +83,6 @@ namespace SetsunaTsuyuri
             bgmCancellationTokenSource = new CancellationTokenSource();
 
             bgmSource.PlayWithFadeIn(duration, bgmCancellationTokenSource.Token).Forget();
-
-            // ------------MEMO--------------------------------------------
-            // 演奏中のBGMがある場合
-            // Play →即時停止
-            // Cross(未実装) →fadeInDurationと同じDurationでfadeout
-            // Stop 演奏中のBGMがあればフェードアウト なければ何もしない
-
-            // private protectedな関数
-            // 複数のインターフェースを実装し、関数名が被ったら
-            // BGMデータ配列からオーディオデータを取得
-            // フェードor即時 クロスフェードの場合 再生中でないオーディオソースコントローラを取得 フェードイン再生
-            // 再生中のオーディオソースコントローラーをフェードアウト
-            //-------------------------------------------------------------
         }
 
         /// <summary>

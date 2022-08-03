@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 using Photon.Pun;
+using SetsunaTsuyuri;
 
 namespace Kawasaki
 {
@@ -48,6 +50,11 @@ namespace Kawasaki
         Animator _animator = null;
 
         /// <summary>
+        /// シネマシーンインパルスソース
+        /// </summary>
+        CinemachineImpulseSource _cinemachineImpulseSource = null;
+
+        /// <summary>
         /// プレイヤーの移動制御
         /// </summary>
         Karaki.PlayerMovement _movement = null;
@@ -92,6 +99,7 @@ namespace Kawasaki
             PhotonView = GetComponent<PhotonView>();
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
+            _cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
             _movement = GetComponent<Karaki.PlayerMovement>();
             _bulletLauncher = GetComponent<Karaki.BulletLauncher>();
 
@@ -279,9 +287,19 @@ namespace Kawasaki
                 return;
             }
 
-            _isAttacking = false;
-            _rigidbody2D.velocity = Vector2.zero;
+            // スタン効果音を再生する
+            AudioManager.PlaySE("Stunned");
 
+            // 衝撃を生成する
+            _cinemachineImpulseSource.GenerateImpulse();
+
+            // 攻撃中フラグOFF
+            _isAttacking = false;
+
+            // 速度を0にする
+            _rigidbody2D.velocity = Vector2.zero;
+            
+            // PlayerMovementの気絶処理を行う
             _movement.BeStunned(duration);
         }
 
