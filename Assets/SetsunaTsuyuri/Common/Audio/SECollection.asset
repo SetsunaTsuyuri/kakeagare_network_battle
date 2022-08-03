@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8daf03d800478274dbf0a06009231da9, type: 3}
   m_Name: SECollection
   m_EditorClassIdentifier: 
-  <Data>k__BackingField: []
+  <Data>k__BackingField:
+  - <Id>k__BackingField: 0
+    <Name>k__BackingField: Stunned
+    <Clip>k__BackingField: {fileID: 8300000, guid: 9bc4e2d524f972e448cc58c16c75bde6, type: 3}
+    <Volume>k__BackingField: 1
