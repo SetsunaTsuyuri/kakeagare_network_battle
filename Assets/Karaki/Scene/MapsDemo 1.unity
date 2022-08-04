@@ -500,6 +500,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7599059277491674067, guid: 2d4915f7c859bc64db45e1abf4b9211d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 8549067269271624840, guid: 2d4915f7c859bc64db45e1abf4b9211d, type: 3}
       propertyPath: m_FlipX
       value: 0
@@ -657,7 +661,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3958942120656025625}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.46, y: 5.04, z: 0}
+  m_LocalPosition: {x: -0.93, y: 1.98, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -805,7 +809,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3958942120656025625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3171b5d7d075fde4ebce75af634f8c16, type: 3}
+  m_Script: {fileID: 11500000, guid: 822950128c9bbb84682a8481377074da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0
+  _tagNameObject: Bullet
+  _hitCount: 1
