@@ -37,7 +37,7 @@ namespace Kawasaki
             }
         }
 
-        private void FixedUpdate()
+        protected override void Move()
         {
             Vector2 position = _initialPosition;
             position.x += _destination.x * Mathf.Sin(_actualSpeed * Time.time);

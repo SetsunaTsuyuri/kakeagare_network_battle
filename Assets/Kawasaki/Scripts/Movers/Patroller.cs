@@ -32,7 +32,7 @@ namespace Kawasaki
             _initialPosition = transform.position;
         }
 
-        private void FixedUpdate()
+        protected override void Move()
         {
             if (destinations.Length == 0)
             {

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5988117227823833916}
   - component: {fileID: 5513920976970526525}
   - component: {fileID: 5405854343913116749}
+  - component: {fileID: -1383513891340163008}
   m_Layer: 0
   m_Name: Item
   m_TagString: Untagged
@@ -115,3 +116,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Settings>k__BackingField: {fileID: 11400000, guid: 30631b8ba144ac94e84079d432c7a616, type: 2}
+--- !u!114 &-1383513891340163008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5961764396317216054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 namespace Kawasaki
 {
@@ -8,7 +9,7 @@ namespace Kawasaki
     /// 動くもの
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Mover : MonoBehaviour
+    public abstract class Mover : MonoBehaviour
     {
         /// <summary>
         /// 速度
@@ -30,9 +31,30 @@ namespace Kawasaki
         /// </summary>
         protected Rigidbody2D _rigidbody2D = null;
 
+        /// <summary>
+        /// フォトンビュー
+        /// </summary>
+        protected PhotonView _photonView = null;
+
         protected virtual void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
+            _photonView = GetComponent<PhotonView>();
         }
+
+        private void FixedUpdate()
+        {
+            if (!PhotonNetwork.IsMasterClient)
+            {
+                return;
+            }
+
+            Move();
+        }
+
+        /// <summary>
+        /// 移動する
+        /// </summary>
+        protected abstract void Move();
     }
 }

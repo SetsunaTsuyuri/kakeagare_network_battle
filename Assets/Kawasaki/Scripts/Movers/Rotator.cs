@@ -9,7 +9,7 @@ namespace Kawasaki
     /// </summary>
     public class Rotator : Mover
     {
-        private void FixedUpdate()
+        protected override void Move()
         {
             float angle = _rigidbody2D.rotation + _speed;
             angle = Mathf.Repeat(angle, 360.0f);
