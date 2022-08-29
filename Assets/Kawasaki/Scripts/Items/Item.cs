@@ -16,6 +16,16 @@ namespace Kawasaki
         [field: SerializeField]
         public ItemsSettings Settings { get; private set; } = null;
 
+        /// <summary>
+        /// フォトンビュー
+        /// </summary>
+        public PhotonView PhotonView { get; private set; } = null;
+
+        private void Awake()
+        {
+            PhotonView = GetComponent<PhotonView>();
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             BeObtained(collision.gameObject);

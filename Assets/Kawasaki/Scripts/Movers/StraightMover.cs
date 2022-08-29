@@ -15,7 +15,7 @@ namespace Kawasaki
         [SerializeField]
         Vector2 _direction = Vector2.zero;
 
-        private void FixedUpdate()
+        protected override void Move()
         {
             Vector3 velocity = _speed * _direction.normalized;
             Vector3 position = transform.position + velocity;

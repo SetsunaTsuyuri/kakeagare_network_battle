@@ -69,13 +69,25 @@ namespace Kawasaki
         }
 
         /// <summary>
-        /// クライアントが操作するプレイヤーを取得する
+        /// クライアントのプレイヤーを取得する
         /// </summary>
         /// <returns></returns>
         public Player GetMyPlayer()
         {
             Player player = _players
                 .FirstOrDefault(x => x.PhotonView.IsMine);
+
+            return player;
+        }
+
+        /// <summary>
+        /// 他のクライアントのプレイヤーを取得する
+        /// </summary>
+        /// <returns></returns>
+        public Player GetAnotherPlayer()
+        {
+            Player player = _players
+                .FirstOrDefault(x => !x.PhotonView.IsMine);
 
             return player;
         }

@@ -133,6 +133,8 @@ namespace Kawasaki
 
         private void Update()
         {
+            // カウントダウン中は動かせない
+
             if (!PhotonView.IsMine)
             {
                 return;
@@ -305,23 +307,25 @@ namespace Kawasaki
 
         public void Obtain(Item item)
         {
-            if (PhotonView.IsMine)
+            if (!PhotonView.IsMine)
             {
-                // 最も低い位置にいる場合
-                if (IsInTheLowestPosition)
-                {
-                    // 有利な効果を適用する
-                    ApplyGoodEffect(item);
-                }
-                else
-                {
-                    // 不利な効果を適用する
-                    ApplyBadEffect(item);
-                }
+                return;
             }
 
-            // アイテムを破壊する
-            Destroy(item.gameObject);
+            // 最も低い位置にいる場合
+            if (IsInTheLowestPosition)
+            {
+                // 有利な効果を適用する
+                ApplyGoodEffect(item);
+            }
+            else
+            {
+                // 不利な効果を適用する
+                ApplyBadEffect(item);
+            }
+
+            // アイテムを非アクティブにする
+            //PhotonNetwork.Destroy(item.PhotonView);
         }
 
         /// <summary>

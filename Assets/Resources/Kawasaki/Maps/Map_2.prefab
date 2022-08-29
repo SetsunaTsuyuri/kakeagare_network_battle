@@ -5207,6 +5207,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4312651995462244952}
     m_Modifications:
+    - target: {fileID: -8794974107719257090, guid: 637a413c50b54774eb71fbb9cf2616a7, type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 439666822108319254, guid: 637a413c50b54774eb71fbb9cf2616a7, type: 3}
       propertyPath: m_Name
       value: SpikedBall
@@ -5268,6 +5272,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4312651995462244952}
     m_Modifications:
+    - target: {fileID: -8794974107719257090, guid: 637a413c50b54774eb71fbb9cf2616a7, type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 439666822108319254, guid: 637a413c50b54774eb71fbb9cf2616a7, type: 3}
       propertyPath: m_Name
       value: SpikedBall (1)
