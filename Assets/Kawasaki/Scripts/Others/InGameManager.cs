@@ -18,7 +18,6 @@ namespace Kawasaki
         {
             // BGMを再生する
             AudioManager.PlayBGM("InGame");
-
         }
 
         void IOnEventCallback.OnEvent(EventData photonEvent)
