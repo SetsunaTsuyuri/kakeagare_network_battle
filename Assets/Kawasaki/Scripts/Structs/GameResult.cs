@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Kawasaki
 {
     /// <summary>
-    /// 試合結果
+    /// 試合結果の情報
     /// </summary>
     public struct GameResult
     {

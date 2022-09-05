@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -19,11 +19,11 @@ namespace SetsunaTsuyuri
         bool _isChangingScene = false;
 
         /// <summary>
-        /// シーンを変更する
+        /// シーン変更を開始する
         /// </summary>
         /// <param name="name">シーンの名前</param>
         /// <param name="callback">シーン変更後に呼び出す関数</param>
-        public static void ChangeScene(string name, UnityAction<Scene, LoadSceneMode> callback = null)
+        public static void StartSceneChange(string name, UnityAction<Scene, LoadSceneMode> callback = null)
         {
             // シーン変更中なら中止する
             if (Instance._isChangingScene)
