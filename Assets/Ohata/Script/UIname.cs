@@ -22,16 +22,24 @@ namespace Ohata
         RectTransform _rectTransform;
 
         PhotonView _viewName;
+
+        
+
+
+
         void Start()
         {
             _rectTransform = transform as RectTransform;
             _camera = Camera.main;
             _text = GetComponentInChildren<TextMeshProUGUI>();
 
+            
            
         }
 
         
+
+
 
         private void LateUpdate()
         {
@@ -63,6 +71,7 @@ namespace Ohata
                     {
                         _text.text = "You";
                         _target = myPlayer.transform;
+
                     }
                    
                     break;

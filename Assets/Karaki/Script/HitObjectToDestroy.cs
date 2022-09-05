@@ -7,36 +7,48 @@ namespace Karaki
 {
     public class HitObjectToDestroy : MonoBehaviour
     {
-        [SerializeField, Tooltip("接触すると消えるオブジェクトのタグ名")]
-        string _tagNameObject = "Bullet";
+        [SerializeField, Tooltip("倒されて消えるときに発生させるエフェクトプレハブ")]
+        GameObject _PrefDefeatEffect = null;
+
+        [SerializeField, Tooltip("接触するとダメージを受けるオブジェクトのタグ名")]
+        string _tagNameDamageObject = "Bullet";
+
+        [SerializeField, Tooltip("接触すると即倒されるオブジェクトのタグ名")]
+        string _tagNameDefeatObject = "Player";
 
         [SerializeField, Tooltip("この回数オブジェクトが接触すると消させる")]
         int _hitCount = 1;
 
-        /// <summary>true : 自分のシステムで作られたもの</summary>
-        bool _isMyCreated = false;
-
-        /// <summary>true : 自分のシステムで作られたもの</summary>
-        public bool IsMyCreated { set => _isMyCreated = value; }
-
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject.CompareTag(_tagNameObject))
+            if (collision.gameObject.CompareTag(_tagNameDamageObject))
             {
                 OnHit();
             }
+            else if (collision.gameObject.CompareTag(_tagNameDefeatObject))
+            {
+                OnHit(int.MaxValue);
+            }
         }
 
-        void OnHit()
+        void OnHit(int Damage = 1)
         {
-            if (_isMyCreated)
+            //マスタークライアントのみ、ダメージの処理
+            if (PhotonNetwork.IsMasterClient)
             {
-                _hitCount--;
+                _hitCount -= Damage;
                 if (_hitCount < 1)
                 {
                     PhotonNetwork.Destroy(this.gameObject);
                 }
             }
+        }
+
+        void OnDestroy()
+        {
+            //倒された時のエフェクトは同期させる必要性がないため、個別に実行
+            GameObject effect = Instantiate(_PrefDefeatEffect);
+            effect.transform.position = transform.position;
         }
     }
 }
