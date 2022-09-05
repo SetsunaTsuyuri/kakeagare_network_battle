@@ -57,7 +57,7 @@ namespace Kawasaki
                 PhotonNetwork.Destroy(view);
 
                 // 敗北
-                _gameResult.Win = true;
+                _gameResult.Win = false;
 
                 Debug.Log("敗北");
             }
@@ -71,19 +71,17 @@ namespace Kawasaki
 
             // リザルトシーンの処理
             // リザルトシーンの名前と遷移先で実行したい関数を渡す
-            //SceneChangeManager.StartSceneChange("", OnResultSceneLoaded);
+            SceneChangeManager.StartSceneChange("Result", OnResultSceneLoaded);
         }
 
         private void OnResultSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            // リザルトシーンに存在する何らかの管理者クラスのインスタンスを探す
-            //Hoge hoge = FindObjectOfType<Hoge>();
-
-            // インスタンスを見つけたらそれに試合結果の構造体を渡す
-            //if (hoge)
-            //{
-            //    //hoge.GameResult = GameResult;
-            //}
+            // リザルト表示クラスに試合結果を渡す
+            Tsuguhiko.ResultDisplay resultDisplay = FindObjectOfType<Tsuguhiko.ResultDisplay>();
+            if (resultDisplay)
+            {
+                resultDisplay.ResultJudge = _gameResult;
+            }
         }
     }
 }
