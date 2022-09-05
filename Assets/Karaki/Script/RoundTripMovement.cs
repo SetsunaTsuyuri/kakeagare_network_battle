@@ -46,7 +46,7 @@ namespace Karaki
                 _objectSeekerForCriff.OnObjectExit = OnFindCriffOnFoot;
             }
 
-            _rb.velocity = new Vector2(_movePower, 0f);
+            _rb.velocity = new Vector2(-_movePower, 0f);
 
             _animator.SetBool("IsMove", true);
         }
