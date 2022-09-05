@@ -213,7 +213,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 822950128c9bbb84682a8481377074da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tagNameObject: Bullet
+  _PrefDefeatEffect: {fileID: 1791507897398045035, guid: b4c5c3f5fc242dd48bb81632780bd21f, type: 3}
+  _tagNameDamageObject: Bullet
+  _tagNameDefeatObject: Player
   _hitCount: 1
 --- !u!114 &5034350053331951186
 MonoBehaviour:
