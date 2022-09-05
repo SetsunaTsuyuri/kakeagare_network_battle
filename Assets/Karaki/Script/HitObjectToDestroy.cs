@@ -39,11 +39,16 @@ namespace Karaki
                 _hitCount -= Damage;
                 if (_hitCount < 1)
                 {
-                    GameObject effect = Instantiate(_PrefDefeatEffect);
-                    effect.transform.position = transform.position;
                     PhotonNetwork.Destroy(this.gameObject);
                 }
             }
+        }
+
+        void OnDestroy()
+        {
+            //倒された時のエフェクトは同期させる必要性がないため、個別に実行
+            GameObject effect = Instantiate(_PrefDefeatEffect);
+            effect.transform.position = transform.position;
         }
     }
 }
