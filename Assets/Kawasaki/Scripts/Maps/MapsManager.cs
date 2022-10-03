@@ -97,6 +97,22 @@ namespace Kawasaki
         }
 
         /// <summary>
+        /// プレイヤー阻害ブロックを作る
+        /// </summary>
+        public void CreatePlayerBlocker()
+        {
+            // 唐木さんコンポーネント制作待ち
+        }
+
+        /// <summary>
+        /// プレイヤー阻害ブロックを消す
+        /// </summary>
+        public void DeletePlayerBlocker()
+        {
+            // 唐木さんコンポーネント制作待ち
+        }
+
+        /// <summary>
         /// マップを更新する
         /// </summary>
         /// <param name="player">プレイヤー</param>
@@ -211,6 +227,30 @@ namespace Kawasaki
             {
                 PhotonNetwork.Destroy(map.gameObject);
             }
+        }
+
+        /// <summary>
+        /// 1Pが入室した際の処理
+        /// </summary>
+        public void OnPlayer1Start()
+        {
+            // マップを作る
+            CreateMaps();
+
+            // プレイヤー阻害ブロックを作る
+            CreatePlayerBlocker();
+        }
+
+        /// <summary>
+        /// 2Pが入室した際の処理
+        /// </summary>
+        public void OnPlayer2Start()
+        {
+            // プレイヤーを阻むブロックを消す
+            DeletePlayerBlocker();
+
+            // キルゾーンを作る
+            CreateKillZone();
         }
     }
 }

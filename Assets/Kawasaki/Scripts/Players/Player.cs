@@ -118,23 +118,19 @@ namespace Kawasaki
                 return;
             }
 
-            // 自分がログインした時はマップを生成する
             if (PhotonView.IsMine)
             {
-                MapsManager.Current.CreateMaps();
-                //MapsManager.Current.CreateKillZone();
-
+                MapsManager.Current.OnPlayer1Start();
             }
-            else  // 2人目が入ってきた時にキルゾーンを生成する
+            else
             {
-                MapsManager.Current.CreateKillZone();
+                MapsManager.Current.OnPlayer2Start();
             }
         }
 
         private void Update()
         {
             // カウントダウン中は動かせない
-
             if (!PhotonView.IsMine)
             {
                 return;
@@ -300,7 +296,7 @@ namespace Kawasaki
 
             // 速度を0にする
             _rigidbody2D.velocity = Vector2.zero;
-            
+
             // PlayerMovementの気絶処理を行う
             _movement.BeStunned(duration);
         }
@@ -324,8 +320,7 @@ namespace Kawasaki
                 ApplyBadEffect(item);
             }
 
-            // アイテムを非アクティブにする
-            //PhotonNetwork.Destroy(item.PhotonView);
+            PhotonNetwork.Destroy(item.PhotonView);
         }
 
         /// <summary>
