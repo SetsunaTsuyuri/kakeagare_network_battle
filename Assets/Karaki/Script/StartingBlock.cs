@@ -16,8 +16,8 @@ public class StartingBlock : MonoBehaviour
     /// <summary>生成したブロック実体</summary>
     GameObject _block = null;
 
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>スタートブロックを置く</summary>
+    public void CreateBlock()
     {
         _block = Instantiate(_blockPref, _SpawnPoint.position + Vector3.up * _offsetFromSpawnPosition, _SpawnPoint.rotation);
     }
