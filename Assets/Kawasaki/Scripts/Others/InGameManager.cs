@@ -43,7 +43,7 @@ namespace Kawasaki
         private void OnGameEnd(EventData data)
         {
             // 試合結果
-            _gameResult = new();
+            _gameResult = new GameResult();
 
             int killedPlayerActorNumber = (int)data.CustomData;
             print($"Player {data.Sender} retired.");
