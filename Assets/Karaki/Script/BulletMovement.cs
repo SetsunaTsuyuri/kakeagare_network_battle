@@ -27,11 +27,10 @@ namespace Karaki
         PhotonView _viewBullet = null;
 
         #endregion
+
+        #region プロパティ
         /// <summary>true : 自分が放った弾である</summary>
         public bool IsMine { set => _isMine = value; }
-        #region プロパティ
-
-
         #endregion
 
         void Start()
