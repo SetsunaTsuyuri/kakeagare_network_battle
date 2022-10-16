@@ -58,8 +58,8 @@ namespace Kawasaki
         /// </summary>
         private void OnLose()
         {
-            _winText.enabled = true;
-            _loseText.enabled = false;
+            _loseText.enabled = true;
+            _winText.enabled = false;
         }
     }
 }

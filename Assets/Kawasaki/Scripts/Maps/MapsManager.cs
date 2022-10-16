@@ -17,6 +17,9 @@ namespace Kawasaki
         /// </summary>
         public static MapsManager Current { get; private set; } = null;
 
+        [SerializeField]
+        StartingBlock _startingBlock = null;
+
         /// <summary>
         /// キルゾーンのプレハブ名
         /// </summary>
@@ -101,7 +104,7 @@ namespace Kawasaki
         /// </summary>
         public void CreatePlayerBlocker()
         {
-            // 唐木さんコンポーネント制作待ち
+            _startingBlock.CreateBlock();
         }
 
         /// <summary>
@@ -109,7 +112,7 @@ namespace Kawasaki
         /// </summary>
         public void DeletePlayerBlocker()
         {
-            // 唐木さんコンポーネント制作待ち
+            _startingBlock.DestroyBlock();
         }
 
         /// <summary>

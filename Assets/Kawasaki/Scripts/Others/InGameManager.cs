@@ -48,13 +48,12 @@ namespace Kawasaki
             int killedPlayerActorNumber = (int)data.CustomData;
             print($"Player {data.Sender} retired.");
 
-            // やられたのが自分だったら自分を消す
             if (killedPlayerActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
             {
-                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-                GameObject me = players.Where(x => x.GetPhotonView().IsMine).FirstOrDefault();
-                PhotonView view = me.GetPhotonView();
-                PhotonNetwork.Destroy(view);
+                //GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                //GameObject me = players.Where(x => x.GetPhotonView().IsMine).FirstOrDefault();
+                //PhotonView view = me.GetPhotonView();
+                //PhotonNetwork.Destroy(view);
 
                 // 敗北
                 _gameResult.Win = false;
