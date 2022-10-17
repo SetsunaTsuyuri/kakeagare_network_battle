@@ -31,7 +31,7 @@ namespace Tsuguhiko
             
         }
 
-        IEnumerator CountDown()
+        public IEnumerator CountDown()
         {
             _countText.text = "3";
 
