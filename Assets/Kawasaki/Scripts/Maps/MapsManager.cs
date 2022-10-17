@@ -21,6 +21,12 @@ namespace Kawasaki
         StartingBlock _startingBlock = null;
 
         /// <summary>
+        /// スタートカウントダウン
+        /// </summary>
+        [SerializeField]
+        Tsuguhiko.StartCountDown _startCountDown = null;
+
+        /// <summary>
         /// キルゾーンのプレハブ名
         /// </summary>
         [SerializeField]
@@ -249,7 +255,15 @@ namespace Kawasaki
         /// </summary>
         public void OnPlayer2Start()
         {
-            // プレイヤーを阻むブロックを消す
+            StartCoroutine(OnPlayer2StartAsync());
+        }
+
+        private IEnumerator OnPlayer2StartAsync()
+        {
+            // カウントダウン
+            yield return _startCountDown.CountDown();
+
+            // ゼロになったらプレイヤーを阻むブロックを消す
             DeletePlayerBlocker();
 
             // キルゾーンを作る
