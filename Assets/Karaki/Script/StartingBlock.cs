@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class StartingBlock : MonoBehaviour
 {
-    [SerializeField, Tooltip("ゲームが開始するまで特定範囲から出られなくするブロックのプレハブ")]
-    GameObject _blockPref = null;
+    [SerializeField, Tooltip("ゲームが開始するまで特定範囲から出られなくするブロックプレハブのパス")]
+    string _blockPrefPass = "Resources/Kawasaki/PlayerBlocker.prefab";
 
     [SerializeField, Tooltip("スポーン地点の位置")]
     Transform _SpawnPoint = null;
@@ -19,12 +20,12 @@ public class StartingBlock : MonoBehaviour
     /// <summary>スタートブロックを置く</summary>
     public void CreateBlock()
     {
-        _block = Instantiate(_blockPref, _SpawnPoint.position + Vector3.up * _offsetFromSpawnPosition, _SpawnPoint.rotation);
+        _block = PhotonNetwork.Instantiate(_blockPrefPass, _SpawnPoint.position + Vector3.up * _offsetFromSpawnPosition, _SpawnPoint.rotation);
     }
 
     /// <summary>スタートブロックを消す</summary>
     public void DestroyBlock()
     {
-        Destroy(_block);
+        PhotonNetwork.Destroy(_block);
     }
 }
