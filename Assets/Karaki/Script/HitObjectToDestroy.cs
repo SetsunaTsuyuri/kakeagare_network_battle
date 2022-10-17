@@ -31,6 +31,7 @@ namespace Karaki
             }
         }
 
+        /*
         void OnHit(int Damage = 1)
         {
             //マスタークライアントのみ、ダメージの処理
@@ -49,6 +50,25 @@ namespace Karaki
             //倒された時のエフェクトは同期させる必要性がないため、個別に実行
             GameObject effect = Instantiate(_PrefDefeatEffect);
             effect.transform.position = transform.position;
+        }
+        */
+
+        void OnHit(int Damage = 1)
+        {
+            _hitCount -= Damage;
+
+            if (_hitCount < 1)
+            {
+                //マスタークライアントのみ、倒される処理
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    PhotonNetwork.Destroy(this.gameObject);
+                }
+
+                //倒された時のエフェクトは同期させる必要性がないため、個別に実行
+                GameObject effect = Instantiate(_PrefDefeatEffect);
+                effect.transform.position = transform.position;
+            }
         }
     }
 }
