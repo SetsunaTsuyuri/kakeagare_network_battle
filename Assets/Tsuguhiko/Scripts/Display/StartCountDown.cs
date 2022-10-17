@@ -9,27 +9,14 @@ using TMPro;
 
 namespace Tsuguhiko
 {
-    
+
     public class StartCountDown : MonoBehaviour
     {
         [SerializeField, Header("カウントテキスト")] TextMeshProUGUI _countText;
 
-       // [SerializeField, Header("効果音のクリップ")] AudioClip[] _audioClips;
+        // [SerializeField, Header("効果音のクリップ")] AudioClip[] _audioClips;
 
-      // [SerializeField,Header("効果音のソース")] AudioSource _audioSource;
-
-        void Start()
-        {
-            //  _audioSource = GetComponent<AudioSource>();
-
-            StartCoroutine(CountDown());
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
-        }
+        // [SerializeField,Header("効果音のソース")] AudioSource _audioSource;
 
         public IEnumerator CountDown()
         {
