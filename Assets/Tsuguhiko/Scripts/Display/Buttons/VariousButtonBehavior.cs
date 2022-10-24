@@ -15,7 +15,7 @@ namespace Tsuguhiko
 
         [SerializeField, Header("シーン切り換え待機時間")] float _second;
 
-        [SerializeField, Header("遷移シーン名")] string _sceneName;
+        [SerializeField, Header("遷移シーン名")] string[] _sceneNames;
 
         void Awake()
         {
@@ -28,6 +28,16 @@ namespace Tsuguhiko
             StartCoroutine(StandByTime());
         }
 
+        public void TittleButton()
+        {
+            StartCoroutine(TittleBack());
+        }
+
+        public void ExplanationButton()
+        {
+            StartCoroutine(Explanation());
+        }
+
         public void ExitButton()
         {
             Application.Quit();
@@ -38,7 +48,21 @@ namespace Tsuguhiko
         {
             _eventSystem.enabled = false;
             yield return _wfs;
-            SceneManager.LoadScene(_sceneName);
+            SceneManager.LoadScene(_sceneNames[0]);
+        }
+
+        IEnumerator TittleBack()
+        {
+            _eventSystem.enabled = false;
+            yield return _wfs;
+            SceneManager.LoadScene(_sceneNames[1]);
+        }
+
+        IEnumerator Explanation()
+        {
+            _eventSystem.enabled = false;
+            yield return _wfs;
+            SceneManager.LoadScene(_sceneNames[1]);
         }
     }
 }
