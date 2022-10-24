@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Tsuguhiko/Scenes/Result.unity
     guid: 7bf00e6ef65733b45b48a017b21e67d3
+  - enabled: 1
+    path: Assets/Tsuguhiko/Scenes/Title.unity
+    guid: 78f556c8f79417649a736375870c7c52
   m_configObjects: {}
