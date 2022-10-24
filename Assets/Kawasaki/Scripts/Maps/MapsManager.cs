@@ -258,9 +258,13 @@ namespace Kawasaki
             StartCoroutine(OnPlayer2StartAsync());
         }
 
+        /// <summary>
+        /// 2Pが入室した際の非同期処理
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator OnPlayer2StartAsync()
         {
-            // カウントダウン
+            // カウントダウン(RPC)
             yield return _startCountDown.CountDown();
 
             // ゼロになったらプレイヤーを阻むブロックを消す
