@@ -24,6 +24,11 @@ public class NetworkGameManager : MonoBehaviourPunCallbacks // Photon Realtime �
         Connect("1.0"); // 1.0 はバージョン番号（同じバージョンを指定したクライアント同士が接続できる）
     }
 
+    private void OnDestroy()
+    {
+        Disconnect();
+    }
+
     /// <summary>
     /// Photonに接続する
     /// </summary>
@@ -34,6 +39,14 @@ public class NetworkGameManager : MonoBehaviourPunCallbacks // Photon Realtime �
             PhotonNetwork.GameVersion = gameVersion;    // 同じバージョンを指定したもの同士が接続できる
             PhotonNetwork.ConnectUsingSettings();
         }
+    }
+
+    /// <summary>
+    /// Photonとの接続を切る
+    /// </summary>
+    private void Disconnect()
+    {
+        PhotonNetwork.Disconnect();
     }
 
     /// <summary>

@@ -620,13 +620,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8463729602352600533, guid: e46224c6a5ff3654b93393c43f1f3bec, type: 3}
-      propertyPath: m_ScreenMatchMode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8463729602352600535, guid: e46224c6a5ff3654b93393c43f1f3bec, type: 3}
       propertyPath: m_Name
-      value: InGameCanvas Variant
+      value: InGameCanvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e46224c6a5ff3654b93393c43f1f3bec, type: 3}
