@@ -1350,7 +1350,7 @@ MonoBehaviour:
   - {fileID: 1032789826}
   - {fileID: 2005875530}
   _eventSystem: {fileID: 888193658}
-  _second: 2
+  _second: 0
   _sceneNames:
   - GameSceneTest
   - Title
