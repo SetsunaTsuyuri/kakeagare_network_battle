@@ -493,7 +493,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 157844232}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 626790296}
+        m_TargetAssemblyTypeName: Tsuguhiko.VariousButtonBehavior, Assembly-CSharp
+        m_MethodName: SceneChangeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &157844232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1080,8 +1092,9 @@ MonoBehaviour:
   buttons:
   - {fileID: 157844231}
   _eventSystem: {fileID: 1178463997}
-  _second: 2
-  _sceneNames: []
+  _second: 0
+  _sceneNames:
+  - Title
 --- !u!4 &626790297
 Transform:
   m_ObjectHideFlags: 0
