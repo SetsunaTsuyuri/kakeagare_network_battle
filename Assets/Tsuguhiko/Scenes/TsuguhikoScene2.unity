@@ -552,6 +552,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e34432eaefc8145b5d29d8447cf41d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startingBlock: {fileID: 0}
+  _startCountDown: {fileID: 0}
   _killZonePrefabName: Kawasaki/Killzone
   _killZoneInitialPosition: {x: 0, y: -8, z: 0}
   _initialMapName: Kawasaki/Maps/Map_0
@@ -742,7 +744,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.3161094, y: 1}
+    m_SensorSize: {x: 1.4842957, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
