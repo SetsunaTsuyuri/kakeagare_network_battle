@@ -303,24 +303,22 @@ namespace Kawasaki
 
         public void Obtain(Item item)
         {
-            if (!PhotonView.IsMine)
+            if (PhotonView.IsMine)
             {
-                return;
+                // 最も低い位置にいる場合
+                if (IsInTheLowestPosition)
+                {
+                    // 有利な効果を適用する
+                    ApplyGoodEffect(item);
+                }
+                else
+                {
+                    // 不利な効果を適用する
+                    ApplyBadEffect(item);
+                }
             }
 
-            // 最も低い位置にいる場合
-            if (IsInTheLowestPosition)
-            {
-                // 有利な効果を適用する
-                ApplyGoodEffect(item);
-            }
-            else
-            {
-                // 不利な効果を適用する
-                ApplyBadEffect(item);
-            }
-
-            PhotonNetwork.Destroy(item.PhotonView);
+            Destroy(item.gameObject);
         }
 
         /// <summary>

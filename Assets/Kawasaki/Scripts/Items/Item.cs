@@ -16,16 +16,6 @@ namespace Kawasaki
         [field: SerializeField]
         public ItemsSettings Settings { get; private set; } = null;
 
-        /// <summary>
-        /// フォトンビュー
-        /// </summary>
-        public PhotonView PhotonView { get; private set; } = null;
-
-        private void Awake()
-        {
-            PhotonView = GetComponent<PhotonView>();
-        }
-
         private void OnCollisionEnter2D(Collision2D collision)
         {
             BeObtained(collision.gameObject);
@@ -42,10 +32,9 @@ namespace Kawasaki
         /// <param name="other">接触したゲームオブジェクト</param>
         private void BeObtained(GameObject other)
         {
-            IItemObtainer obtainer = other.GetComponentInParent<IItemObtainer>();
-            if (obtainer is not null)
+            if (other.TryGetComponent(out IItemObtainer itemObtainer))
             {
-                obtainer.Obtain(this);
+                itemObtainer.Obtain(this);
             }
         }
     }
